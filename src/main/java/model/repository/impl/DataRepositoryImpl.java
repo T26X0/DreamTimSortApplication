@@ -1,15 +1,18 @@
 package model.repository.impl;
 
 import model.repository.DataRepository;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import model.repository.exception.NoSuchFileException;
 
 public class DataRepositoryImpl implements DataRepository {
 
     @Override
-    public String getData() {
+
+    public String getData() throws NoSuchFileException {
         StringBuilder data = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(getClass().getResourceAsStream("/file.txt"), StandardCharsets.UTF_8))) {

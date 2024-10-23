@@ -16,6 +16,7 @@ public class Barrel implements Sortable {
 
     @Override
     public int compareTo(Sortable o) {
-        return 0;
+        if (o instanceof Barrel) return 0;
+        return -1;
     }
 }
