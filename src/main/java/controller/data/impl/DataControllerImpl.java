@@ -40,7 +40,10 @@ public class DataControllerImpl implements DataController {
 
     @Override
     public List<Sortable> sortData() {
-        Collections.sort(savedData); // сортировка всех данных по типо
+        // сортировка всех данных по типу
+        Collections.sort(savedData);
+
+        // сортировка всех данных между собой
         savedData.sort(GeneralComparatorUtil.getComparatorForSortableEntity());
         return savedData;
     }
