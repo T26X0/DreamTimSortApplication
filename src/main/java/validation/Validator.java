@@ -10,7 +10,7 @@ import validation.exception.PatternMismatchException;
  * ----------------------------------------------------
  * Идея задать регулярное выражение и проверять по нему
  * <pre>
- * basicDataPattern String("String","String","String");
+ * basicDataPattern String(String,String,String);
  *
  * animalPattern Animal("String" -> не больше 30 символов,
  *                      "String" -> не больше 30 символов,
@@ -21,7 +21,7 @@ import validation.exception.PatternMismatchException;
  * humanPattern Human("String" -> не больше 20 символов,
  *                     int -> не больше 100,
  *                     "String" -> не больше 30 символов);
- *                     </>
+ *                     </pre>
  */
 public interface Validator {
 

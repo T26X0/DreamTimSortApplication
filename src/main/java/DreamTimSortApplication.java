@@ -1,3 +1,4 @@
+import controller.input.exception.NotExistCommandException;
 import controller.user.UserController;
 import controller.user.impl.UserControllerImpl;
 
@@ -15,6 +16,10 @@ public class DreamTimSortApplication {
     }
 
     private void start() {
-        userController.startTrackingUserAction();
+        try {
+            userController.startTrackingUserAction();
+        } catch (NotExistCommandException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
