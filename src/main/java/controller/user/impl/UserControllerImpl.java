@@ -33,11 +33,12 @@ public class UserControllerImpl implements UserController {
     @Override
     public void executeCommand(MenuPoints command) {
         switch (command) {
-            case SHOW_MAIN_MENU_OPTIONS -> {}
             case READING_DATA_FROM_FILE -> {}
             case CREATING_RAND_DATA -> {}
-            case ENTERING_DATA -> {}
-            case SORTING_DATA -> {}
+            case ENTERING_DATA_IN_TERMINAL -> {}
+            case RESET_CACHE -> {}
+            case SORTING_DATA_FROM_CACHE -> {}
+            case RESET_FILE_FOR_DATA -> {}
             case EXIT -> closeApp();
         }
     }
