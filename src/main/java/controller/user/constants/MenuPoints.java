@@ -6,12 +6,13 @@ import java.util.Optional;
 
 public enum MenuPoints {
 
-    SHOW_MAIN_MENU_OPTIONS(10),
-    READING_DATA_FROM_FILE(20),
-    CREATING_RAND_DATA(30),
-    ENTERING_DATA(40),
-    SORTING_DATA(50),
-    EXIT(60);
+    READING_DATA_FROM_FILE(1),
+    CREATING_RAND_DATA(2),
+    ENTERING_DATA_IN_TERMINAL(3),
+    SORTING_DATA_FROM_CACHE(4),
+    RESET_CACHE(5),
+    RESET_FILE_FOR_DATA(6),
+    EXIT(7);
 
     @Getter
     private int pointId;

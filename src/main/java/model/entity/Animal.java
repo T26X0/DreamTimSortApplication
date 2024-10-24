@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 import model.entity.sortable.Sortable;
 
-import java.util.Comparator;
 
 @Data
 @Builder
@@ -18,6 +17,8 @@ public class Animal implements Sortable {
 
     @Override
     public int compareTo(Sortable o) {
-        return 0;
+        if (o instanceof Animal) return 0;
+        if (o instanceof Barrel) return 1;
+        return -1;
     }
 }

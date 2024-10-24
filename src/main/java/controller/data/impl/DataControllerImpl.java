@@ -1,12 +1,12 @@
 package controller.data.impl;
 
 import controller.data.DataController;
+import controller.data.comparator.GeneralComparatorUtil;
 import model.DataService;
 import model.entity.sortable.Sortable;
 import model.impl.DataServiceImpl;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class DataControllerImpl implements DataController {
 
@@ -40,7 +40,11 @@ public class DataControllerImpl implements DataController {
 
     @Override
     public List<Sortable> sortData() {
+        // сортировка всех данных по типу
         Collections.sort(savedData);
+
+        // сортировка всех данных между собой
+        savedData.sort(GeneralComparatorUtil.getComparatorForSortableEntity());
         return savedData;
     }
 
