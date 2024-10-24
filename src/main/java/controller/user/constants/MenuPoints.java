@@ -21,7 +21,7 @@ public enum MenuPoints {
         this.pointId = pointId;
     }
 
-    public Optional<MenuPoints> getIfContains(String command) {
+    public static Optional<MenuPoints> getIfContains(String command) {
         return null;
     }
 }

@@ -4,12 +4,16 @@ import controller.input.UserInput;
 import controller.input.exception.NotExistCommandException;
 import controller.user.constants.MenuPoints;
 
+import java.util.Scanner;
+
 public class UserInputImpl implements UserInput {
 
     // подсказка: Scanner
 
     private String getInput() {
-        return null;
+        System.out.print("Введите данные: ");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
     @Override
