@@ -110,20 +110,20 @@ class TimSortTest {
 
     public static void main(String[] args) {
         List<Sortable> unsortedList = new ArrayList<>();
-        unsortedList.add(
-                Animal.builder()
-                        .species("b")
-                        .eyeColor("b")
-                        .hair(true)
-                        .build()
-        );
-        unsortedList.add(
-                Animal.builder()
-                        .species("b")
-                        .eyeColor("a")
-                        .hair(false)
-                        .build()
-        );
+//        unsortedList.add(
+//                Animal.builder()
+//                        .species("a")
+//                        .eyeColor("b")
+//                        .hair(true)
+//                        .build()
+//        );
+//        unsortedList.add(
+//                Animal.builder()
+//                        .species("b")
+//                        .eyeColor("a")
+//                        .hair(false)
+//                        .build()
+//        );
         unsortedList.add(
                 Human.builder()
                         .age(21)
@@ -132,19 +132,39 @@ class TimSortTest {
                         .build()
         );
         unsortedList.add(
-                Barrel.builder()
-                        .value(50)
-                        .storedMaterial("wood")
-                        .materialOfManufacture("metal")
+                Human.builder()
+                        .age(1)
+                        .gender("male")
+                        .surname("ivanov")
                         .build()
         );
         unsortedList.add(
-                Animal.builder()
-                        .species("b")
-                        .eyeColor("a")
-                        .hair(true)
+                Human.builder()
+                        .age(2)
+                        .gender("male")
+                        .surname("ivanov")
                         .build()
         );
+        unsortedList.add(
+                Human.builder()
+                        .age(5)
+                        .gender("male")
+                        .surname("ivanov")
+                        .build()
+        );
+//        unsortedList.add(
+//                Barrel.builder()
+//                        .value(50)
+//                        .storedMaterial("wood")
+//                        .materialOfManufacture("metal")
+//                        .build()
+//        );        unsortedList.add(
+//                Animal.builder()
+//                        .species("b")
+//                        .eyeColor("a")
+//                        .hair(true)
+//                        .build()
+//        );
         unsortedList.forEach(System.out::println);
         TimSort.timSort(unsortedList, GeneralComparatorUtil.getComparatorForSortableEntity());
         System.out.println("********");
