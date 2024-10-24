@@ -21,10 +21,14 @@ public class HumanValidatorImpl implements Validator {
 
     @Override
     public void validate(String human)
-        throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException {
+        throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException, PatternMismatchException {
 
         Pattern pattern = Pattern.compile(Patterns.HUMAN_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(human);
+
+        if (!matcher.matches()) {
+            throw new PatternMismatchException("Строка не соответствует паттерну.");
+        }
 
         String gender = matcher.group(1);
         int Age = Integer.parseInt(matcher.group(2));

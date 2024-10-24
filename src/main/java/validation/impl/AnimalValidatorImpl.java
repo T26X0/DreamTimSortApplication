@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import validation.Validator;
 import validation.exception.ExceedingPermissibleLengthException;
 import validation.exception.IncorrectDataTypeException;
+import validation.exception.PatternMismatchException;
 import validation.util.Patterns;
 
 public class AnimalValidatorImpl implements Validator {
@@ -17,10 +18,14 @@ public class AnimalValidatorImpl implements Validator {
 
     @Override
     public void validate(String animal)
-        throws ExceedingPermissibleLengthException, IncorrectDataTypeException {
+        throws ExceedingPermissibleLengthException, IncorrectDataTypeException, PatternMismatchException {
 
         Pattern pattern = Pattern.compile(Patterns.ANIMAL_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(animal);
+
+        if (!matcher.matches()) {
+            throw new PatternMismatchException("Строка не соответствует паттерну.");
+        }
 
         String species = matcher.group(1);
         String eyeColor = matcher.group(2);

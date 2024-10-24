@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import validation.Validator;
 import validation.exception.ExceedingPermissibleLengthException;
+import validation.exception.PatternMismatchException;
 import validation.util.Patterns;
 
 public class BarrelValidatorImpl implements Validator {
@@ -16,10 +17,15 @@ public class BarrelValidatorImpl implements Validator {
    private static final int MAX_BARREL_MATERIAL_LENGTH = 50;
 
     @Override
-    public void validate(String barrel) throws ExceedingPermissibleLengthException {
+    public void validate(String barrel)
+        throws ExceedingPermissibleLengthException, PatternMismatchException {
 
         Pattern pattern = Pattern.compile(Patterns.BARREL_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(barrel);
+
+        if (!matcher.matches()) {
+            throw new PatternMismatchException("Строка не соответствует паттерну.");
+        }
 
         int volume = Integer.parseInt(matcher.group(1));
         String storedMaterial = matcher.group(2);
