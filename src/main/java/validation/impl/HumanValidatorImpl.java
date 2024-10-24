@@ -7,7 +7,7 @@ import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
 import static validation.util.ValidatorUtil.genderCheck;
 import static validation.util.ValidatorUtil.isPositive;
 import static validation.util.ValidatorUtil.matchesMaxStringLength;
-import static validation.util.ValidatorUtil.maxValue;
+import static validation.util.ValidatorUtil.compareValueWithMaxPossible;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,7 +40,7 @@ public class HumanValidatorImpl implements Validator {
                 "Гендер можеть быть только '%s' или '%s'.", GENDER_MALE, GENDER_FEMALE));
         }
 
-        if (isPositive(Age) || maxValue(Age, MAX_AGE)) {
+        if (isPositive(Age) || compareValueWithMaxPossible(Age, MAX_AGE)) {
             throw new IncorrectAgeException(String.format(
                 "Возраст не может быть больше %d.", MAX_AGE));
         }

@@ -15,7 +15,7 @@ public class ValidatorUtil {
         return true;
     }
 
-    public static boolean maxValue(int value, int max) {
+    public static boolean compareValueWithMaxPossible(int value, int max) {
         if (value > max) {
             return false;
         }

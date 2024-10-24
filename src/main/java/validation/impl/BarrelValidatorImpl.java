@@ -3,7 +3,7 @@ package validation.impl;
 import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
 import static validation.util.ValidationConstant.MAX_VOLUME;
 import static validation.util.ValidatorUtil.matchesMaxStringLength;
-import static validation.util.ValidatorUtil.maxValue;
+import static validation.util.ValidatorUtil.compareValueWithMaxPossible;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +29,7 @@ public class BarrelValidatorImpl implements Validator {
         String storedMaterial = matcher.group(2);
         String materialOfManufacture = matcher.group(3);
 
-        if (maxValue(volume, MAX_VOLUME)) {
+        if (compareValueWithMaxPossible(volume, MAX_VOLUME)) {
             throw new ExceedingPermissibleLengthException(String.format(
                 "Ёмкость бочки не может быть больше %d.", MAX_VOLUME));
         }
