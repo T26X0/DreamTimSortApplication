@@ -11,7 +11,7 @@ import model.repository.exception.NoSuchFileException;
 
 public class DataRepositoryImpl implements DataRepository {
 
-    private static final String FILE_PATH = "src/main/resources/file.txt";
+    private final String FILE_PATH = "src/main/resources/file.txt";
 
     @Override
     public String getData() throws NoSuchFileException {
