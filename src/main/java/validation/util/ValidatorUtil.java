@@ -1,5 +1,11 @@
 package validation.util;
 
+import static validation.util.ValidationConstant.GENDER_FEMALE;
+import static validation.util.ValidationConstant.GENDER_MALE;
+import static validation.util.ValidationConstant.HAS_HAIR;
+import static validation.util.ValidationConstant.HAS_NO_HAIR;
+import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
+
 public class ValidatorUtil {
 
     public static boolean isPositive(int number) {
@@ -16,22 +22,22 @@ public class ValidatorUtil {
         return true;
     }
 
-    public static boolean maxStringLength(String string, int length) {
-        if (string.length() > length) {
+    public static boolean matchesMaxStringLength(String string) {
+        if (string.length() > MAX_STRING_LENGTH) {
             return false;
         }
         return true;
     }
 
     public static boolean genderCheck(String gender) {
-        if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")) {
+        if (!gender.equalsIgnoreCase(GENDER_MALE) && !gender.equalsIgnoreCase(GENDER_FEMALE)) {
             return false;
         }
         return true;
     }
 
     public static boolean hairCheck(String hair) {
-        if (!hair.equalsIgnoreCase("yes") && !hair.equalsIgnoreCase("no")) {
+        if (!hair.equalsIgnoreCase(HAS_HAIR) && !hair.equalsIgnoreCase(HAS_NO_HAIR)) {
             return false;
         }
         return true;

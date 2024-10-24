@@ -1,8 +1,12 @@
 package validation.impl;
 
+import static validation.util.ValidationConstant.GENDER_FEMALE;
+import static validation.util.ValidationConstant.GENDER_MALE;
+import static validation.util.ValidationConstant.MAX_AGE;
+import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
 import static validation.util.ValidatorUtil.genderCheck;
 import static validation.util.ValidatorUtil.isPositive;
-import static validation.util.ValidatorUtil.maxStringLength;
+import static validation.util.ValidatorUtil.matchesMaxStringLength;
 import static validation.util.ValidatorUtil.maxValue;
 
 import java.util.regex.Matcher;
@@ -15,9 +19,6 @@ import validation.exception.PatternMismatchException;
 import validation.util.Patterns;
 
 public class HumanValidatorImpl implements Validator {
-
-    private static final int MAX_AGE_VALUE = 100;
-    private static final int MAX_NAME_LENGTH = 30;
 
     @Override
     public void validate(String human)
@@ -35,18 +36,18 @@ public class HumanValidatorImpl implements Validator {
         String name = matcher.group(3);
 
         if (genderCheck(gender)) {
-            throw new IncorrectDataTypeException(
-                "Гендер можеть быть только Male или Female.");
+            throw new IncorrectDataTypeException(String.format(
+                "Гендер можеть быть только '%s' или '%s'.", GENDER_MALE, GENDER_FEMALE));
         }
 
-        if (isPositive(Age) || maxValue(Age, MAX_AGE_VALUE)) {
+        if (isPositive(Age) || maxValue(Age, MAX_AGE)) {
             throw new IncorrectAgeException(String.format(
-                "Возраст не может быть больше %d.", MAX_AGE_VALUE));
+                "Возраст не может быть больше %d.", MAX_AGE));
         }
 
-        if (maxStringLength(name, MAX_NAME_LENGTH)) {
+        if (matchesMaxStringLength(name)) {
             throw new ExceedingPermissibleLengthException(String.format(
-                "Имя не должно превышать %d символов.", MAX_NAME_LENGTH));
+                "Имя не должно превышать %d символов.", MAX_STRING_LENGTH));
         }
     }
 }

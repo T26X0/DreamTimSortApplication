@@ -1,7 +1,10 @@
 package validation.impl;
 
+import static validation.util.ValidationConstant.HAS_HAIR;
+import static validation.util.ValidationConstant.HAS_NO_HAIR;
+import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
 import static validation.util.ValidatorUtil.hairCheck;
-import static validation.util.ValidatorUtil.maxStringLength;
+import static validation.util.ValidatorUtil.matchesMaxStringLength;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,9 +15,6 @@ import validation.exception.PatternMismatchException;
 import validation.util.Patterns;
 
 public class AnimalValidatorImpl implements Validator {
-
-    private static final int MAX_SPECIES_LENGTH = 30;
-    private static final int MAX_EYE_LENGTH = 30;
 
     @Override
     public void validate(String animal)
@@ -32,18 +32,19 @@ public class AnimalValidatorImpl implements Validator {
         String hair = matcher.group(3);
 
 
-        if (maxStringLength(species, MAX_SPECIES_LENGTH)) {
+        if (matchesMaxStringLength(species)) {
             throw new ExceedingPermissibleLengthException(String.format(
-                "Вид животного не должен превышать %d символов.", MAX_SPECIES_LENGTH));
+                "Вид животного не должен превышать %d символов.", MAX_STRING_LENGTH));
         }
 
-        if (maxStringLength(eyeColor, MAX_EYE_LENGTH)) {
+        if (matchesMaxStringLength(eyeColor)) {
             throw new ExceedingPermissibleLengthException(String.format(
-                "Цвет глаз не должен превышать %d символов.", MAX_EYE_LENGTH));
+                "Цвет глаз не должен превышать %d символов.", MAX_STRING_LENGTH));
         }
 
         if (hairCheck(hair)) {
-            throw new IncorrectDataTypeException("Наличие шерсти должно быть 'yes' или 'no'.");
+            throw new IncorrectDataTypeException(String.format(
+                "Наличие шерсти должно быть '%s' или '%s'.", HAS_HAIR, HAS_NO_HAIR));
         }
     }
 }
