@@ -1,4 +1,4 @@
-package display.config.constants;
+package view.display.config.constants;
 
 import java.util.HashMap;
 import java.util.Map;

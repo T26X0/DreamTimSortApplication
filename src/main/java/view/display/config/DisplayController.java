@@ -1,9 +1,9 @@
-package display.config;
+package view.display.config;
 
-import display.config.constants.CenterMod;
-import display.config.constants.DisplayConst;
-import display.config.constants.TextBlocks;
-import display.exception.TextBlockFilledException;
+import view.display.config.constants.CenterMod;
+import view.display.config.constants.DisplayConst;
+import view.display.config.constants.TextBlocks;
+import view.display.exception.TextBlockFilledException;
 
 import java.io.IOException;
 import java.util.*;

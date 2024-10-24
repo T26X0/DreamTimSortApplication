@@ -1,4 +1,4 @@
-package display.exception;
+package view.display.exception;
 
 public class TextBlockFilledException extends Exception {
 

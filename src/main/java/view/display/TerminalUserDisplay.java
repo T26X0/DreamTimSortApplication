@@ -1,10 +1,10 @@
-package display;
+package view.display;
 
-import display.config.DisplayController;
-import display.config.constants.CenterMod;
-import display.config.constants.DisplayConst;
-import display.config.constants.TextBlocks;
-import display.exception.TextBlockFilledException;
+import view.display.config.DisplayController;
+import view.display.config.constants.CenterMod;
+import view.display.config.constants.DisplayConst;
+import view.display.config.constants.TextBlocks;
+import view.display.exception.TextBlockFilledException;
 
 public class TerminalUserDisplay extends DisplayController {
 

@@ -1,4 +1,4 @@
-package display.config.constants;
+package view.display.config.constants;
 
 public enum CenterMod {
 
