@@ -11,6 +11,7 @@ import validation.util.Patterns;
 
 public class BarrelValidatorImpl implements Validator {
 
+    @Override
     public void validate(String barrel) throws ExceedingPermissibleLengthException {
 
         Pattern pattern = Pattern.compile(Patterns.BARREL_PATTERN, Pattern.CASE_INSENSITIVE);

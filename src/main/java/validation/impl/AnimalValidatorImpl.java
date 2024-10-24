@@ -12,6 +12,7 @@ import validation.util.Patterns;
 
 public class AnimalValidatorImpl implements Validator {
 
+    @Override
     public void validate(String animal)
         throws ExceedingPermissibleLengthException, IncorrectDataTypeException {
 
