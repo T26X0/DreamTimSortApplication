@@ -33,12 +33,20 @@ public class DataRepositoryImpl implements DataRepository {
                 new InputStreamReader(new FileInputStream(FILE_PATH), StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                data.append(line.trim()).append("\n"); // Чтение строки с файла и удаление лишних пробелов
+                if (!line.trim().isEmpty()) { // Проверка, на пустую строку
+                    data.append(line.trim()).append("\n"); // Чтение строки с файла и удаление лишних пробелов
+                }
             }
-
         } catch (IOException e) {
             e.printStackTrace(); // Логирование исключения
         }
+
+        // Если файл пустой, ничего не возвращаем
+        if (data.toString().trim().isEmpty()) {
+            System.out.println("Файл пуст, данных для отображения нет.");
+            return "";
+        }
+
         return data.toString(); //Возвращение итоговой строки
     }
 }
