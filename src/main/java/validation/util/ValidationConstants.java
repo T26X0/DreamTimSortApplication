@@ -1,6 +1,6 @@
 package validation.util;
 
-public class ValidationConstant {
+public class ValidationConstants {
     public static final int MAX_STRING_LENGTH = 50;
     public static final int MAX_AGE = 100;
     public static final int MAX_VOLUME = 250;

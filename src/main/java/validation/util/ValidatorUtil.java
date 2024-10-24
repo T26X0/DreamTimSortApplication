@@ -1,10 +1,10 @@
 package validation.util;
 
-import static validation.util.ValidationConstant.GENDER_FEMALE;
-import static validation.util.ValidationConstant.GENDER_MALE;
-import static validation.util.ValidationConstant.HAS_HAIR;
-import static validation.util.ValidationConstant.HAS_NO_HAIR;
-import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
+import static validation.util.ValidationConstants.GENDER_FEMALE;
+import static validation.util.ValidationConstants.GENDER_MALE;
+import static validation.util.ValidationConstants.HAS_HAIR;
+import static validation.util.ValidationConstants.HAS_NO_HAIR;
+import static validation.util.ValidationConstants.MAX_STRING_LENGTH;
 
 public class ValidatorUtil {
 

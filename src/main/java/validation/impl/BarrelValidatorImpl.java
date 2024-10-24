@@ -1,7 +1,7 @@
 package validation.impl;
 
-import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
-import static validation.util.ValidationConstant.MAX_VOLUME;
+import static validation.util.ValidationConstants.MAX_STRING_LENGTH;
+import static validation.util.ValidationConstants.MAX_VOLUME;
 import static validation.util.ValidatorUtil.matchesMaxStringLength;
 import static validation.util.ValidatorUtil.compareValueWithMaxPossible;
 

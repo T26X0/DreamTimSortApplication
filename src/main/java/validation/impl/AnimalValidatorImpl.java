@@ -1,8 +1,8 @@
 package validation.impl;
 
-import static validation.util.ValidationConstant.HAS_HAIR;
-import static validation.util.ValidationConstant.HAS_NO_HAIR;
-import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
+import static validation.util.ValidationConstants.HAS_HAIR;
+import static validation.util.ValidationConstants.HAS_NO_HAIR;
+import static validation.util.ValidationConstants.MAX_STRING_LENGTH;
 import static validation.util.ValidatorUtil.hairCheck;
 import static validation.util.ValidatorUtil.matchesMaxStringLength;
 

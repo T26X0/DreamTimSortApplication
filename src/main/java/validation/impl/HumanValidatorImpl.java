@@ -1,9 +1,9 @@
 package validation.impl;
 
-import static validation.util.ValidationConstant.GENDER_FEMALE;
-import static validation.util.ValidationConstant.GENDER_MALE;
-import static validation.util.ValidationConstant.MAX_AGE;
-import static validation.util.ValidationConstant.MAX_STRING_LENGTH;
+import static validation.util.ValidationConstants.GENDER_FEMALE;
+import static validation.util.ValidationConstants.GENDER_MALE;
+import static validation.util.ValidationConstants.MAX_AGE;
+import static validation.util.ValidationConstants.MAX_STRING_LENGTH;
 import static validation.util.ValidatorUtil.genderCheck;
 import static validation.util.ValidatorUtil.isPositive;
 import static validation.util.ValidatorUtil.matchesMaxStringLength;
