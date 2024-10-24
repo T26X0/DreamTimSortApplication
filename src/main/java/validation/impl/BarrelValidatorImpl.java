@@ -21,13 +21,13 @@ public class BarrelValidatorImpl implements Validator {
         String materialOfManufacture = matcher.group(3);
 
         if (maxValue(volume, 250)) {
-            throw new ExceedingPermissibleLengthException("Первое значение превышает 30 символов.");
+            throw new ExceedingPermissibleLengthException("Ёмкость бочки не может быть больше 250.");
         }
         if (maxStringLength(storedMaterial, 50)) {
-            throw new ExceedingPermissibleLengthException("Второе значение превышает 30 символов.");
+            throw new ExceedingPermissibleLengthException("Название хранимого материала должно быть не больше 50 символов.");
         }
         if (maxStringLength(materialOfManufacture, 50)) {
-            throw new ExceedingPermissibleLengthException("Третье значение превышает 30 символов.");
+            throw new ExceedingPermissibleLengthException("Название материала бочки не может быть длиннее 50 символов.");
         }
     }
 }

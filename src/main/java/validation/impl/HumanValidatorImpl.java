@@ -22,10 +22,6 @@ public class HumanValidatorImpl implements Validator {
         Pattern pattern = Pattern.compile(Patterns.HUMAN_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(human);
 
-        if (!matcher.matches()) {
-            throw new PatternMismatchException("Строка не соответствует паттерну 'Human'");
-        }
-
         String gender = matcher.group(1);
         int Age = Integer.parseInt(matcher.group(2));
         String name = matcher.group(3);
@@ -37,7 +33,7 @@ public class HumanValidatorImpl implements Validator {
             throw new IncorrectAgeException("Возраст не может быть больше 100.");
         }
         if (maxStringLength(name, 30)) {
-            throw new ExceedingPermissibleLengthException("Третье значение превышает 30 символов.");
+            throw new ExceedingPermissibleLengthException("Имя не должно превышать 30 символов.");
         }
     }
 }
