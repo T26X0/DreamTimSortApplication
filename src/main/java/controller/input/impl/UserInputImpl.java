@@ -4,6 +4,7 @@ import controller.input.UserInput;
 import controller.input.exception.NotExistCommandException;
 import controller.user.constants.MenuPoints;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class UserInputImpl implements UserInput {
@@ -18,7 +19,11 @@ public class UserInputImpl implements UserInput {
 
     @Override
     public MenuPoints getCommand() throws NotExistCommandException {
-        return null;
+        Optional<MenuPoints> ifContains = MenuPoints.getIfContains(getInput());
+        if (ifContains.isPresent()) {
+            return ifContains.get();
+        }
+        return MenuPoints.valueOf("Нет команды");
     }
 
     /**
