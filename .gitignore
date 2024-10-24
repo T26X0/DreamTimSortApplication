@@ -7,7 +7,11 @@ target/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
+<<<<<<< HEAD
 .idea/**
+=======
+.idea/
+>>>>>>> feature_timsort
 *.iws
 *.iml
 *.ipr
