@@ -29,18 +29,18 @@ public class BarrelValidatorImpl implements Validator {
         String storedMaterial = matcher.group(2);
         String materialOfManufacture = matcher.group(3);
 
-        if (compareValueWithMaxPossible(volume, MAX_VOLUME)) {
+        if (!compareValueWithMaxPossible(volume, MAX_VOLUME)) {
             throw new ExceedingPermissibleLengthException(String.format(
                 "Ёмкость бочки не может быть больше %d.", MAX_VOLUME));
         }
 
-        if (matchesMaxStringLength(storedMaterial)) {
+        if (!matchesMaxStringLength(storedMaterial)) {
             throw new ExceedingPermissibleLengthException(String.format(
                 "Название хранимого материала должно быть не больше %d символов.",
                 MAX_STRING_LENGTH));
         }
 
-        if (matchesMaxStringLength(materialOfManufacture)) {
+        if (!matchesMaxStringLength(materialOfManufacture)) {
             throw new ExceedingPermissibleLengthException(String.format(
                 "Название материала бочки не может быть длиннее %d символов.",
                 MAX_STRING_LENGTH));
