@@ -22,7 +22,7 @@ public class DataRepositoryImpl implements DataRepository {
         if (!file.exists()) {
             try {
                 Files.createFile(Paths.get(FILE_PATH));
-                System.out.println("Искомый файл не был найден. Директория обновлена и создан новый файл для записи данных. Можете заполнять и вернуться сюда снова после заполнения файла.");
+                System.out.println("Искомый файл не найден. Директория успешно обновлена, и создан новый файл для записи данных. Вы можете заполнить его и вернуться сюда для продолжения работы после заполнения.");
             } catch (Exception e) {
                 e.printStackTrace(); // Логирование исключения
             }
