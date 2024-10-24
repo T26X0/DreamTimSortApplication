@@ -16,9 +16,12 @@ import validation.util.Patterns;
 
 public class HumanValidatorImpl implements Validator {
 
+    private static final int MAX_AGE_VALUE = 100;
+    private static final int MAX_NAME_LENGTH = 30;
+
     @Override
     public void validate(String human)
-        throws ExceedingPermissibleLengthException, IncorrectAgeException, PatternMismatchException, IncorrectDataTypeException {
+        throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException {
 
         Pattern pattern = Pattern.compile(Patterns.HUMAN_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(human);
@@ -28,13 +31,18 @@ public class HumanValidatorImpl implements Validator {
         String name = matcher.group(3);
 
         if (genderCheck(gender)) {
-            throw new IncorrectDataTypeException("Гендер можеть быть только Male или Female.");
+            throw new IncorrectDataTypeException(
+                "Гендер можеть быть только Male или Female.");
         }
-        if (isPositive(Age) || maxValue(Age, 100)) {
-            throw new IncorrectAgeException("Возраст не может быть больше 100.");
+
+        if (isPositive(Age) || maxValue(Age, MAX_AGE_VALUE)) {
+            throw new IncorrectAgeException(String.format(
+                "Возраст не может быть больше %d.", MAX_AGE_VALUE));
         }
-        if (maxStringLength(name, 30)) {
-            throw new ExceedingPermissibleLengthException("Имя не должно превышать 30 символов.");
+
+        if (maxStringLength(name, MAX_NAME_LENGTH)) {
+            throw new ExceedingPermissibleLengthException(String.format(
+                "Имя не должно превышать %d символов.", MAX_NAME_LENGTH));
         }
     }
 }

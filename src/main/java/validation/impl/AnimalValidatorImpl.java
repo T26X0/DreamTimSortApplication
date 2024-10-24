@@ -12,6 +12,9 @@ import validation.util.Patterns;
 
 public class AnimalValidatorImpl implements Validator {
 
+    private static final int MAX_SPECIES_LENGTH = 30;
+    private static final int MAX_EYE_LENGTH = 30;
+
     @Override
     public void validate(String animal)
         throws ExceedingPermissibleLengthException, IncorrectDataTypeException {
@@ -19,18 +22,23 @@ public class AnimalValidatorImpl implements Validator {
         Pattern pattern = Pattern.compile(Patterns.ANIMAL_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(animal);
 
-        String species = matcher.group(1); // cat
-        String eyeColor = matcher.group(2); // white
-        String hair = matcher.group(3); // yes/no
+        String species = matcher.group(1);
+        String eyeColor = matcher.group(2);
+        String hair = matcher.group(3);
 
-        if (maxStringLength(species, 30)) {
-            throw new ExceedingPermissibleLengthException("Первое значение превышает 30 символов.");
+
+        if (maxStringLength(species, MAX_SPECIES_LENGTH)) {
+            throw new ExceedingPermissibleLengthException(String.format(
+                "Вид животного не должен превышать %d символов.", MAX_SPECIES_LENGTH));
         }
-        if (maxStringLength(eyeColor, 30)) {
-            throw new ExceedingPermissibleLengthException("Второе значение превышает 30 символов.");
+
+        if (maxStringLength(eyeColor, MAX_EYE_LENGTH)) {
+            throw new ExceedingPermissibleLengthException(String.format(
+                "Цвет глаз не должен превышать %d символов.", MAX_EYE_LENGTH));
         }
+
         if (hairCheck(hair)) {
-            throw new IncorrectDataTypeException("Третье значение должно быть 'yes' или 'no'.");
+            throw new IncorrectDataTypeException("Наличие шерсти должно быть 'yes' или 'no'.");
         }
     }
 }
