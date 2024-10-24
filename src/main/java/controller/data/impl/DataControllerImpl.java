@@ -2,6 +2,8 @@ package controller.data.impl;
 
 import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
+import controller.data.generation.DataGeneration;
+import controller.data.generation.impl.DataGenerationImpl;
 import model.DataService;
 import model.entity.sortable.Sortable;
 import model.impl.DataServiceImpl;
@@ -15,6 +17,7 @@ public class DataControllerImpl implements DataController {
     private final DataService dataService;
 
     public DataControllerImpl() {
+
         this.dataService = new DataServiceImpl();
     }
 
@@ -23,13 +26,35 @@ public class DataControllerImpl implements DataController {
      */
     @Override
     public List<Sortable> readData() {
+
         return null;
     }
 
     @Override
     public List<Sortable> generateData(int limit) {
 
-        return null;
+        List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
+        List<Sortable> instances = new ArrayList<>();
+        DataGeneration dataGen = new DataGenerationImpl();
+
+        for (int i = 0; i < parts.size(); i++) {
+            int count = parts.get(i);
+            if (i == 0) {
+                for (int j = 0; j < count; j++) {
+                    instances.add(dataGen.getRandomAnimal());
+                }
+            } else if (i == 1) {
+                for (int j = 0; j < count; j++) {
+                    instances.add(dataGen.getRandomBarrel());
+                }
+            } else if (i == 2) {
+                for (int j = 0; j < count; j++) {
+                    instances.add(dataGen.getRandomHuman());
+                }
+            }
+        }
+
+        return instances;
     }
 
     @Override
@@ -50,6 +75,7 @@ public class DataControllerImpl implements DataController {
 
     @Override
     public void saveDataInCache(List<Sortable> listData) {
+
     }
 
     @Override
