@@ -1,12 +1,5 @@
 package controller.data.sort;
 
-import controller.data.comparator.GeneralComparatorUtil;
-import model.entity.Animal;
-import model.entity.Barrel;
-import model.entity.Human;
-import model.entity.sortable.Sortable;
-
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -39,14 +32,13 @@ public class TimSort {
     }
 
     /**
-     * Реализация Insertion Sort для сортировки подмассива от left до right.
+     * Сортировка вставками сортировки подмассива от left до right.
      */
     private static <T> void insertionSort(List<T> array, int left, int right, Comparator<? super T> unsortedSubList) {
         for (int i = left + 1; i <= right; i++) {
             T temp = array.get(i);
             int j = i - 1;
-            int compare = unsortedSubList.compare(array.get(j), temp);
-            while (j >= left && compare > 0) {
+            while (j >= left && unsortedSubList.compare(array.get(j), temp) > 0) {
                 array.set(j + 1, array.get(j));
                 j--;
             }
@@ -55,9 +47,7 @@ public class TimSort {
     }
 
     /**
-     * Объединение двух отсортированных подмассивов.
-     * Первый подмассив: array[left..mid]
-     * Второй подмассив: array[mid+1..right]
+     * Объединение двух отсортированных подмассивов
      */
     private static <T> void merge(List<T> array, int left, int mid, int right, Comparator<? super T> sortedList) {
         // Размеры двух подмассивов для слияния
@@ -103,72 +93,5 @@ public class TimSort {
             j++;
             k++;
         }
-    }
-}
-
-class TimSortTest {
-
-    public static void main(String[] args) {
-        List<Sortable> unsortedList = new ArrayList<>();
-//        unsortedList.add(
-//                Animal.builder()
-//                        .species("a")
-//                        .eyeColor("b")
-//                        .hair(true)
-//                        .build()
-//        );
-//        unsortedList.add(
-//                Animal.builder()
-//                        .species("b")
-//                        .eyeColor("a")
-//                        .hair(false)
-//                        .build()
-//        );
-        unsortedList.add(
-                Human.builder()
-                        .age(21)
-                        .gender("male")
-                        .surname("ivanov")
-                        .build()
-        );
-        unsortedList.add(
-                Human.builder()
-                        .age(1)
-                        .gender("male")
-                        .surname("ivanov")
-                        .build()
-        );
-        unsortedList.add(
-                Human.builder()
-                        .age(2)
-                        .gender("male")
-                        .surname("ivanov")
-                        .build()
-        );
-        unsortedList.add(
-                Human.builder()
-                        .age(5)
-                        .gender("male")
-                        .surname("ivanov")
-                        .build()
-        );
-//        unsortedList.add(
-//                Barrel.builder()
-//                        .value(50)
-//                        .storedMaterial("wood")
-//                        .materialOfManufacture("metal")
-//                        .build()
-//        );        unsortedList.add(
-//                Animal.builder()
-//                        .species("b")
-//                        .eyeColor("a")
-//                        .hair(true)
-//                        .build()
-//        );
-        unsortedList.forEach(System.out::println);
-        TimSort.timSort(unsortedList, GeneralComparatorUtil.getComparatorForSortableEntity());
-        System.out.println("********");
-        unsortedList.forEach(System.out::println);
-
     }
 }
