@@ -32,17 +32,17 @@ public class AnimalValidatorImpl implements Validator {
         String hair = matcher.group(3);
 
 
-        if (matchesMaxStringLength(species)) {
+        if (!matchesMaxStringLength(species)) {
             throw new ExceedingPermissibleLengthException(String.format(
                 "Вид животного не должен превышать %d символов.", MAX_STRING_LENGTH));
         }
 
-        if (matchesMaxStringLength(eyeColor)) {
+        if (!matchesMaxStringLength(eyeColor)) {
             throw new ExceedingPermissibleLengthException(String.format(
                 "Цвет глаз не должен превышать %d символов.", MAX_STRING_LENGTH));
         }
 
-        if (hairCheck(hair)) {
+        if (!hairCheck(hair)) {
             throw new IncorrectDataTypeException(String.format(
                 "Наличие шерсти должно быть '%s' или '%s'.", HAS_HAIR, HAS_NO_HAIR));
         }

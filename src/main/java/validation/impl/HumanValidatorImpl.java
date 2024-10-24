@@ -35,17 +35,17 @@ public class HumanValidatorImpl implements Validator {
         int Age = Integer.parseInt(matcher.group(2));
         String name = matcher.group(3);
 
-        if (genderCheck(gender)) {
+        if (!genderCheck(gender)) {
             throw new IncorrectDataTypeException(String.format(
                 "Гендер можеть быть только '%s' или '%s'.", GENDER_MALE, GENDER_FEMALE));
         }
 
-        if (isPositive(Age) && compareValueWithMaxPossible(Age, MAX_AGE)) {
+        if (!isPositive(Age) || !compareValueWithMaxPossible(Age, MAX_AGE)) {
             throw new IncorrectAgeException(String.format(
-                "Возраст не может быть больше %d.", MAX_AGE));
+                "Возраст не может быть больше %d и меньше 0.", MAX_AGE));
         }
 
-        if (matchesMaxStringLength(name)) {
+        if (!matchesMaxStringLength(name)) {
             throw new ExceedingPermissibleLengthException(String.format(
                 "Имя не должно превышать %d символов.", MAX_STRING_LENGTH));
         }
