@@ -23,7 +23,7 @@ public class ValidatorUtil {
     }
 
     public static boolean matchesMaxStringLength(String string) {
-        if (string.length() > MAX_STRING_LENGTH) {
+        if (string.length() < MAX_STRING_LENGTH) {
             return false;
         }
         return true;
