@@ -40,7 +40,7 @@ public class HumanValidatorImpl implements Validator {
                 "Гендер можеть быть только '%s' или '%s'.", GENDER_MALE, GENDER_FEMALE));
         }
 
-        if (isPositive(Age) || compareValueWithMaxPossible(Age, MAX_AGE)) {
+        if (isPositive(Age) && compareValueWithMaxPossible(Age, MAX_AGE)) {
             throw new IncorrectAgeException(String.format(
                 "Возраст не может быть больше %d.", MAX_AGE));
         }
