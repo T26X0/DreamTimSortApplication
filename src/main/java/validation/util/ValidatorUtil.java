@@ -16,7 +16,7 @@ public class ValidatorUtil {
     }
 
     public static boolean compareValueWithMaxPossible(int value, int max) {
-        if (value > max) {
+        if (value <= max) {
             return false;
         }
         return true;
@@ -30,7 +30,7 @@ public class ValidatorUtil {
     }
 
     public static boolean genderCheck(String gender) {
-        if (!gender.equalsIgnoreCase(GENDER_MALE) && !gender.equalsIgnoreCase(GENDER_FEMALE)) {
+        if (!gender.equalsIgnoreCase(GENDER_MALE) || !gender.equalsIgnoreCase(GENDER_FEMALE)) {
             return false;
         }
         return true;
