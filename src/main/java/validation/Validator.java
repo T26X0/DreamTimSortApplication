@@ -1,10 +1,4 @@
 package validation;
-
-import validation.exception.ExceedingPermissibleLengthException;
-import validation.exception.IncorrectAgeException;
-import validation.exception.IncorrectDataTypeException;
-import validation.exception.PatternMismatchException;
-
 /**
  * Валидатор проверяет корректность данных на соответствие шаблону данных
  * ----------------------------------------------------
