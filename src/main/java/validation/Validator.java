@@ -1,10 +1,4 @@
 package validation;
-
-import validation.exception.ExceedingPermissibleLengthException;
-import validation.exception.IncorrectAgeException;
-import validation.exception.IncorrectDataTypeException;
-import validation.exception.PatternMismatchException;
-
 /**
  * Валидатор проверяет корректность данных на соответствие шаблону данных
  * ----------------------------------------------------
@@ -24,17 +18,9 @@ import validation.exception.PatternMismatchException;
  *                     </pre>
  */
 public interface Validator {
-
-
     /**
      * Валидация на соответствие общему шаблону производится в первый круг вылидации
      * В нашем случае сразу после прочтения из файла или ввода пользователя
      */
-    void validationToPatternBasicData(String string) throws PatternMismatchException;
-
-    void validationAnimal(String userSample) throws ExceedingPermissibleLengthException, IncorrectDataTypeException;
-
-    void validationBarrel(String userSample) throws ExceedingPermissibleLengthException;
-
-    void validationHuman(String userSample) throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException;
+    void validate(String entity) throws Exception;
 }
