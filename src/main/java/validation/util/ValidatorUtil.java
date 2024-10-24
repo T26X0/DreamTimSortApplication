@@ -22,6 +22,7 @@ public class ValidatorUtil {
         }
         return true;
     }
+
     public static boolean genderCheck(String gender) {
         if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")) {
             return false;
@@ -39,5 +40,4 @@ public class ValidatorUtil {
     private ValidatorUtil() {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
-
 }
