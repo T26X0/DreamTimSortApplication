@@ -2,6 +2,7 @@ package validation.impl;
 
 import static validation.util.ValidationConstants.EntityConstants.HAS_NO_WOOL;
 import static validation.util.ValidationConstants.EntityConstants.HAS_WOOL;
+import static validation.util.ValidationConstants.RegexPatterns.ANIMAL_PATTERN;
 import static validation.util.ValidatorUtil.validateMaxStringLength;
 
 import java.util.regex.Matcher;
@@ -10,7 +11,6 @@ import validation.Validator;
 import validation.exception.ExceedingPermissibleLengthException;
 import validation.exception.IncorrectDataTypeException;
 import validation.exception.PatternMismatchException;
-import validation.util.ValidationConstants.RegexPatterns;
 
 public class AnimalValidatorImpl implements Validator {
 
@@ -18,7 +18,7 @@ public class AnimalValidatorImpl implements Validator {
     public void validate(String animal)
         throws ExceedingPermissibleLengthException, IncorrectDataTypeException, PatternMismatchException {
 
-        Pattern pattern = Pattern.compile(RegexPatterns.ANIMAL_PATTERN, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(ANIMAL_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(animal);
 
         if (!matcher.matches()) {
