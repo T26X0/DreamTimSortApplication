@@ -1,16 +1,17 @@
 import controller.input.exception.NotExistCommandException;
 import controller.user.UserController;
 import controller.user.impl.UserControllerImpl;
+import view.display.exception.TextBlockFilledException;
 
 public class DreamTimSortApplication {
 
     private final UserController userController;
 
-    private DreamTimSortApplication() {
+    private DreamTimSortApplication() throws TextBlockFilledException {
         this.userController = new UserControllerImpl();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TextBlockFilledException {
         DreamTimSortApplication dreamTimSortApplication = new DreamTimSortApplication();
         dreamTimSortApplication.start();
     }
