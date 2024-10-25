@@ -16,6 +16,12 @@ public interface UserController {
     void executeCommand(MenuPoints command);
 
     void closeApp();
+    void readDataFromFile();
+    void createRandomData();
+    void enterDataInTerminal();
+    void resetCache();
+    void sortDataFromCache();
+    void resetFileForData();
 }
 
 
