@@ -10,8 +10,8 @@ public class TerminalUserDisplay extends DisplayController {
 
     /**
      * <pre>Minimal values for app size:
-     *      x > 45,
-     *      y > 16.</pre>
+     *      x > 50,
+     *      y > 30.</pre>
      * <pre> :
      *      x > 60,
      *      y > 23.</pre>
