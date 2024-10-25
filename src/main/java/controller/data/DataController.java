@@ -11,7 +11,7 @@ public interface DataController {
 
     List<Sortable> readData();
 
-    List<Sortable> generateData(int limit);
+    List<Sortable> generateData(int limit) throws Exception;
 
     List<Sortable> getDataFromCache();
 
