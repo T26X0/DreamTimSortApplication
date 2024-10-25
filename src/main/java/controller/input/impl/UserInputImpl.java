@@ -12,6 +12,7 @@ public class UserInputImpl implements UserInput {
     // подсказка: Scanner
 
     private String getInput() {
+        System.out.println("3 - ввести данные \n7 - выход");
         System.out.print("Введите данные: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -31,6 +32,8 @@ public class UserInputImpl implements UserInput {
      */
     @Override
     public String getDataFromUserInput() {
-        return null;
+        System.out.print("Введите данные: ");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 }

@@ -1,7 +1,9 @@
 package controller.user.constants;
 
-import lombok.Getter;
+//import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 
 public enum MenuPoints {
@@ -14,7 +16,7 @@ public enum MenuPoints {
     RESET_FILE_FOR_DATA(6),
     EXIT(7);
 
-    @Getter
+//    @Getter
     private int pointId;
 
     MenuPoints(int pointId) {
@@ -22,6 +24,8 @@ public enum MenuPoints {
     }
 
     public static Optional<MenuPoints> getIfContains(String command) {
-        return null;
+        return Arrays.stream(MenuPoints.values())
+                .filter(p-> Objects.equals(p, command))
+                .findFirst();
     }
 }
