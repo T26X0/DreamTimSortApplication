@@ -7,6 +7,7 @@ import controller.data.generation.impl.DataGenerationImpl;
 import model.DataService;
 import model.entity.sortable.Sortable;
 import model.impl.DataServiceImpl;
+import validation.impl.IsPositive;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -33,6 +34,8 @@ public class DataControllerImpl implements DataController {
 
     @Override
     public List<Sortable> generateData(int limit) {
+
+        IsPositive.validate(limit);
 
         List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
         List<Sortable> instances = new ArrayList<>();
