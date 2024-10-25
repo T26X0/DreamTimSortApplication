@@ -9,6 +9,7 @@ import model.entity.sortable.Sortable;
 import model.impl.DataServiceImpl;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class DataControllerImpl implements DataController {
 
@@ -37,22 +38,9 @@ public class DataControllerImpl implements DataController {
         List<Sortable> instances = new ArrayList<>();
         DataGeneration dataGen = new DataGenerationImpl();
 
-        for (int i = 0; i < parts.size(); i++) {
-            int count = parts.get(i);
-            if (i == 0) {
-                for (int j = 0; j < count; j++) {
-                    instances.add(dataGen.getRandomAnimal());
-                }
-            } else if (i == 1) {
-                for (int j = 0; j < count; j++) {
-                    instances.add(dataGen.getRandomBarrel());
-                }
-            } else if (i == 2) {
-                for (int j = 0; j < count; j++) {
-                    instances.add(dataGen.getRandomHuman());
-                }
-            }
-        }
+        generateInstances(instances, parts.get(0), dataGen::getRandomAnimal);
+        generateInstances(instances, parts.get(1), dataGen::getRandomBarrel);
+        generateInstances(instances, parts.get(2), dataGen::getRandomHuman);
 
         return instances;
     }
@@ -81,5 +69,11 @@ public class DataControllerImpl implements DataController {
     @Override
     public void clearCache() {
 
+    }
+
+    private void generateInstances(List<Sortable> instances, int count, Supplier<Sortable> generator) {
+        for (int j = 0; j < count; j++) {
+            instances.add(generator.get());
+        }
     }
 }
