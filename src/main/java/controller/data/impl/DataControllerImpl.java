@@ -33,7 +33,7 @@ public class DataControllerImpl implements DataController {
     }
 
     @Override
-    public List<Sortable> generateData(int limit) {
+    public List<Sortable> generateData(int limit) throws Exception {
 
         IsPositive.validate(limit);
 

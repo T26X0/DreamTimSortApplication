@@ -2,10 +2,10 @@ package validation.impl;
 
 public class IsPositive {
 
-    public static void validate(int value) {
+    public static void validate(int value) throws Exception {
 
         if (value <= 0) {
-            throw new IllegalArgumentException("Отрицательное число недопустимо");
+            throw new Exception("Отрицательное число недопустимо");
         }
     }
 }
