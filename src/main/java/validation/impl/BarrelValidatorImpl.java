@@ -1,16 +1,15 @@
 package validation.impl;
 
-import static validation.util.ValidationConstants.MAX_STRING_LENGTH;
-import static validation.util.ValidationConstants.MAX_VOLUME;
-import static validation.util.ValidatorUtil.matchesMaxStringLength;
-import static validation.util.ValidatorUtil.compareValueWithMaxPossible;
+import static validation.util.ValidationConstants.EntityConstants.MAX_VOLUME;
+import static validation.util.ValidationConstants.RegexPatterns.BARREL_PATTERN;
+import static validation.util.ValidatorUtil.validateMaxPossibleIntValue;
+import static validation.util.ValidatorUtil.validateMaxStringLength;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import validation.Validator;
 import validation.exception.ExceedingPermissibleLengthException;
 import validation.exception.PatternMismatchException;
-import validation.util.Patterns;
 
 public class BarrelValidatorImpl implements Validator {
 
@@ -18,7 +17,7 @@ public class BarrelValidatorImpl implements Validator {
     public void validate(String barrel)
         throws ExceedingPermissibleLengthException, PatternMismatchException {
 
-        Pattern pattern = Pattern.compile(Patterns.BARREL_PATTERN, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(BARREL_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(barrel);
 
         if (!matcher.matches()) {
@@ -29,21 +28,13 @@ public class BarrelValidatorImpl implements Validator {
         String storedMaterial = matcher.group(2);
         String materialOfManufacture = matcher.group(3);
 
-        if (!compareValueWithMaxPossible(volume, MAX_VOLUME)) {
+        validateMaxStringLength(storedMaterial, "Хранимый материал");
+        validateMaxStringLength(materialOfManufacture, "Материал бочки");
+
+        if (!validateMaxPossibleIntValue(volume, MAX_VOLUME)) {
             throw new ExceedingPermissibleLengthException(String.format(
                 "Ёмкость бочки не может быть больше %d.", MAX_VOLUME));
         }
 
-        if (!matchesMaxStringLength(storedMaterial)) {
-            throw new ExceedingPermissibleLengthException(String.format(
-                "Название хранимого материала должно быть не больше %d символов.",
-                MAX_STRING_LENGTH));
-        }
-
-        if (!matchesMaxStringLength(materialOfManufacture)) {
-            throw new ExceedingPermissibleLengthException(String.format(
-                "Название материала бочки не может быть длиннее %d символов.",
-                MAX_STRING_LENGTH));
-        }
     }
 }

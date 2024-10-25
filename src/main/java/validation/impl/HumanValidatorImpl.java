@@ -1,13 +1,12 @@
 package validation.impl;
 
-import static validation.util.ValidationConstants.GENDER_FEMALE;
-import static validation.util.ValidationConstants.GENDER_MALE;
-import static validation.util.ValidationConstants.MAX_AGE;
-import static validation.util.ValidationConstants.MAX_STRING_LENGTH;
-import static validation.util.ValidatorUtil.genderCheck;
+import static validation.util.ValidationConstants.EntityConstants.GENDER_FEMALE;
+import static validation.util.ValidationConstants.EntityConstants.GENDER_MALE;
+import static validation.util.ValidationConstants.EntityConstants.MAX_AGE;
+import static validation.util.ValidationConstants.RegexPatterns.HUMAN_PATTERN;
 import static validation.util.ValidatorUtil.isPositive;
-import static validation.util.ValidatorUtil.matchesMaxStringLength;
-import static validation.util.ValidatorUtil.compareValueWithMaxPossible;
+import static validation.util.ValidatorUtil.validateMaxPossibleIntValue;
+import static validation.util.ValidatorUtil.validateMaxStringLength;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +15,6 @@ import validation.exception.ExceedingPermissibleLengthException;
 import validation.exception.IncorrectAgeException;
 import validation.exception.IncorrectDataTypeException;
 import validation.exception.PatternMismatchException;
-import validation.util.Patterns;
 
 public class HumanValidatorImpl implements Validator {
 
@@ -24,7 +22,7 @@ public class HumanValidatorImpl implements Validator {
     public void validate(String human)
         throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException, PatternMismatchException {
 
-        Pattern pattern = Pattern.compile(Patterns.HUMAN_PATTERN, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(HUMAN_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(human);
 
         if (!matcher.matches()) {
@@ -35,19 +33,16 @@ public class HumanValidatorImpl implements Validator {
         int Age = Integer.parseInt(matcher.group(2));
         String name = matcher.group(3);
 
-        if (!genderCheck(gender)) {
-            throw new IncorrectDataTypeException(String.format(
-                "Гендер можеть быть только '%s' или '%s'.", GENDER_MALE, GENDER_FEMALE));
-        }
+        validateMaxStringLength(name, "Имя");
 
-        if (!isPositive(Age) || !compareValueWithMaxPossible(Age, MAX_AGE)) {
+        if (!validateMaxPossibleIntValue(Age, MAX_AGE)) {
             throw new IncorrectAgeException(String.format(
                 "Возраст не может быть больше %d и меньше 0.", MAX_AGE));
         }
 
-        if (!matchesMaxStringLength(name)) {
-            throw new ExceedingPermissibleLengthException(String.format(
-                "Имя не должно превышать %d символов.", MAX_STRING_LENGTH));
+        if (!gender.equalsIgnoreCase(GENDER_MALE) && !gender.equalsIgnoreCase(GENDER_FEMALE)) {
+            throw new IncorrectDataTypeException(String.format(
+                "Гендер можеть быть только '%s' или '%s'.", GENDER_MALE, GENDER_FEMALE));
         }
     }
 }
