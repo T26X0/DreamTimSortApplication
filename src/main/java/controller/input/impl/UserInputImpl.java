@@ -9,10 +9,8 @@ import java.util.Scanner;
 
 public class UserInputImpl implements UserInput {
 
-    // подсказка: Scanner
-
     private String getInput() {
-        System.out.println("3 - ввести данные \n7 - выход");
+//        System.out.println("3 - ввести данные \n7 - выход");
         System.out.print("Введите данные: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -20,11 +18,14 @@ public class UserInputImpl implements UserInput {
 
     @Override
     public MenuPoints getCommand() throws NotExistCommandException {
+        for (MenuPoints points : MenuPoints.values()){
+            System.out.println(points.getPointId());
+        }
         Optional<MenuPoints> ifContains = MenuPoints.getIfContains(getInput());
         if (ifContains.isPresent()) {
             return ifContains.get();
         }
-        return MenuPoints.valueOf("Нет команды");
+        throw  new NotExistCommandException("Нет команды");
     }
 
     /**
