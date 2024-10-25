@@ -1,4 +1,4 @@
-package controller.data.impl;
+package controller.data.generation;
 
 import java.util.ArrayList;
 import java.util.List;
