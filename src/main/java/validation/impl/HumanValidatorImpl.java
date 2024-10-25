@@ -4,7 +4,6 @@ import static validation.util.ValidationConstants.EntityConstants.GENDER_FEMALE;
 import static validation.util.ValidationConstants.EntityConstants.GENDER_MALE;
 import static validation.util.ValidationConstants.EntityConstants.MAX_AGE;
 import static validation.util.ValidationConstants.RegexPatterns.HUMAN_PATTERN;
-import static validation.util.ValidatorUtil.isPositive;
 import static validation.util.ValidatorUtil.validateMaxPossibleIntValue;
 import static validation.util.ValidatorUtil.validateMaxStringLength;
 
