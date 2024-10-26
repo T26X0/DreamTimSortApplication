@@ -18,6 +18,7 @@ public class BinarySearchImpl implements BinarySearch<Sortable> {
         this.dataController = new DataControllerImpl();
     }
 
+    // TODO: Task on 27.10
     @Override
     public Sortable findEntity(EntityPatternsRegex entityPattern) throws EmptyCacheException {
         Sortable result = null;

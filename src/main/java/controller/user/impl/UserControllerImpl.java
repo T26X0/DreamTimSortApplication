@@ -22,11 +22,6 @@ public class UserControllerImpl implements UserController {
         this.userInput = new UserInputImpl();
         this.userDisplay = new TerminalUserDisplay(80, 30, "DreamTimSortApplication", true);
         initializeMenuDisplay();
-
-        private List<Exception> exceptions;
-        
-        this.exceptions = new ArrayList<>();
-
     }
 
     @Override
