@@ -8,6 +8,7 @@ import model.DataService;
 import model.entity.sortable.Sortable;
 import model.impl.DataServiceImpl;
 import validation.Validator;
+import validation.impl.DynamicEntityValidator;
 import validation.impl.IsPositive;
 import validation.impl.SourceStringValidatorImpl;
 
