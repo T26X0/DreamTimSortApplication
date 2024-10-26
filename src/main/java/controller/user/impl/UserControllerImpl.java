@@ -10,6 +10,9 @@ import view.display.config.constants.CenterMod;
 import view.display.config.constants.TextBlocks;
 import view.display.exception.TextBlockFilledException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserControllerImpl implements UserController {
 
     private final UserInput userInput;
@@ -19,6 +22,11 @@ public class UserControllerImpl implements UserController {
         this.userInput = new UserInputImpl();
         this.userDisplay = new TerminalUserDisplay(80, 30, "DreamTimSortApplication", true);
         initializeMenuDisplay();
+
+        private List<Exception> exceptions;
+        
+        this.exceptions = new ArrayList<>();
+
     }
 
     @Override
