@@ -1,20 +1,22 @@
-package validation.impl;
+package validation.forEntities.impl;
 
 import static model.repository.constants.EntityConstants.*;
 import static model.repository.constants.EntityPatternsRegex.HUMAN_PATTERN;
-import static validation.util.ValidatorUtil.validateMaxPossibleIntValue;
-import static validation.util.ValidatorUtil.validateMaxStringLength;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import validation.Validator;
-import validation.exception.ExceedingPermissibleLengthException;
-import validation.exception.IncorrectAgeException;
-import validation.exception.IncorrectDataTypeException;
-import validation.exception.PatternMismatchException;
+import validation.forEntities.HumanEntityValidator;
+import validation.exception.*;
+import validation.forData.impl.IntegerValidatorImpl;
+import validation.forData.impl.StringValidatorImpl;
+import validation.forData.IntegerValidator;
+import validation.forData.StringValidator;
 
-public class HumanValidatorImpl implements Validator {
+public class HumanEntityValidatorImpl implements HumanEntityValidator {
+
+    StringValidator stringValidator = new StringValidatorImpl();
+    IntegerValidator integerValidator = new IntegerValidatorImpl();
 
     private final int maxAge = Integer.parseInt(MAX_AGE.getValue());
 
@@ -23,8 +25,8 @@ public class HumanValidatorImpl implements Validator {
     private final String genderFemale = GENDER_FEMALE.getValue();
 
     @Override
-    public void validate(String human)
-        throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException, PatternMismatchException {
+    public void validateEntityString(String human)
+            throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException, PatternMismatchException, NegativeNumberException {
 
         Pattern pattern = Pattern.compile(HUMAN_PATTERN.getPattern(), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(human);
@@ -37,12 +39,9 @@ public class HumanValidatorImpl implements Validator {
         int Age = Integer.parseInt(matcher.group(2));
         String name = matcher.group(3);
 
-        validateMaxStringLength(name, "Имя");
+        stringValidator.validateMaxStringLength(name);
 
-        if (!validateMaxPossibleIntValue(Age, maxAge)) {
-            throw new IncorrectAgeException(String.format(
-                "Возраст не может быть больше %d и меньше 0.", maxAge));
-        }
+        integerValidator.validateMaxPossibleIntValue(Age, maxAge);
 
         if (!gender.equalsIgnoreCase(genderMale) && !gender.equalsIgnoreCase(genderFemale)) {
             throw new IncorrectDataTypeException(String.format(
