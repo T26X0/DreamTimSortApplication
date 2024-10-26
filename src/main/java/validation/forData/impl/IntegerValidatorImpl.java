@@ -17,6 +17,6 @@ public class IntegerValidatorImpl implements IntegerValidator {
     public void validateMaxPossibleIntValue(int value, int maxPossible) throws NegativeNumberException, IncorrectAgeException {
         isPositive(value);
         if (value <= maxPossible) throw new IncorrectAgeException(String.format(
-                "Возраст не может быть больше %d и меньше 0.", maxPossible));
+                "Число не может быть больше %d и меньше 0.", maxPossible));
     }
 }
