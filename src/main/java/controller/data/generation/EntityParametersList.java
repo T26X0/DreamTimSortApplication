@@ -4,22 +4,22 @@ import java.util.List;
 
 public interface EntityParametersList {
     interface AnimalList{
-        List<String> species = List.of("Cat", "Dog", "Donkey", "Goat", "Horse", "Pig",
-                "Rabbit", "Alligator", "Antelope", "Monkey", "Badger", "Basilisk", "Beaver", "Bee", "Bird",
-                "Lynx", "Bonobo", "Mina", "Bovid", "Butterfly", "Buzzard", "Camel", "Water", "Porpoise", "Cardinal");
+        List<String> species = List.of("cat", "dog", "donkey", "goat", "Horse", "pig",
+                "rabbit", "alligator", "antelope", "monkey", "badger", "basilisk", "beaver", "bee", "bird",
+                "lynx", "bonobo", "mina", "bovid", "butterfly", "buzzard", "camel", "water", "porpoise", "cardinal");
 
-        List<String> eyeColor = List.of("Black", "Blue", "Brown", "Gray", "Green", "Hazel");
+        List<String> eyeColor = List.of("black", "blue", "brown", "gray", "green", "hazel");
     }
 
     interface HumanList{
-        List<String> SecondName = List.of("Klyuev", "Noskov", "Ozerov", "Koltsov", "Komissarov",
-                "Merkulov", "Kireev", "Khomyakov", "Bulatov", "Ananev", "Burov", "Shaposhnikov", "Druzhinin",
-                "Ostrovskii", "Shevelev", "Dolgov", "Suslov", "Shevtsov", "Pastukhov", "Rubtsov");
+        List<String> SecondName = List.of("klyuev", "noskov", "ozerov", "koltsov", "komissarov",
+                "merkulov", "kireev", "khomyakov", "bulatov", "ananev", "burov", "shaposhnikov", "druzhinin",
+                "ostrovskii", "shevelev", "dolgov", "suslov", "shevtsov", "pastukhov", "rubtsov");
     }
 
     interface BarrelList{
-        List<String> materialBarrel = List.of("Wood", "Metal", "Plastic");
+        List<String> materialBarrel = List.of("wood", "metal", "plastic");
 
-        List<String>  storedMaterial = List.of("Water", "Alcohol", "Powder", "Meat", "Fish", "Honey");
+        List<String>  storedMaterial = List.of("water", "alcohol", "powder", "meat", "fish", "honey");
     }
 }
