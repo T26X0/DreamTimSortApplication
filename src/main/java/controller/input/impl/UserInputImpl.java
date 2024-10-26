@@ -10,8 +10,7 @@ import java.util.Scanner;
 public class UserInputImpl implements UserInput {
 
     private String getInput() {
-//        System.out.println("3 - ввести данные \n7 - выход");
-        System.out.print("Введите данные: ");
+        System.out.print("Введите команду: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
