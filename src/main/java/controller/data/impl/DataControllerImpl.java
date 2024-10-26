@@ -3,12 +3,12 @@ package controller.data.impl;
 import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
-import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
-import model.DataService;
 import model.entity.sortable.Sortable;
-import model.impl.DataServiceImpl;
-import validation.impl.IsPositive;
+import model.service.DataService;
+import model.service.impl.DataServiceImpl;
+import validation.forData.IntegerValidator;
+import validation.forData.impl.IntegerValidatorImpl;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -18,6 +18,8 @@ public class DataControllerImpl implements DataController {
     private List<Sortable> savedData = null;
 
     private final DataService dataService;
+
+    private final IntegerValidator integerValidator = new IntegerValidatorImpl();
 
     public DataControllerImpl() {
 
@@ -36,17 +38,19 @@ public class DataControllerImpl implements DataController {
     @Override
     public List<Sortable> generateData(int limit) throws Exception {
 
-        IsPositive.validate(limit);
-
-        List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
-        List<Sortable> instances = new ArrayList<>();
+        integerValidator.isPositive(limit);
         DataGeneration dataGen = new DataGenerationImpl();
+        return dataGen.getRandomClassList(limit);
 
-        generateInstances(instances, parts.get(0), dataGen::getRandomAnimal);
-        generateInstances(instances, parts.get(1), dataGen::getRandomBarrel);
-        generateInstances(instances, parts.get(2), dataGen::getRandomHuman);
 
-        return instances;
+        // TODO: Обсудить и корректно использовать методы генератора
+//        List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
+//        List<Sortable> instances = new ArrayList<>();
+//        generateInstances(instances, parts.get(0), dataGen::getRandomAnimal);
+//        generateInstances(instances, parts.get(1), dataGen::getRandomBarrel);
+//        generateInstances(instances, parts.get(2), dataGen::getRandomHuman);
+//        return instances;
+
     }
 
     @Override
@@ -73,6 +77,11 @@ public class DataControllerImpl implements DataController {
     @Override
     public void clearCache() {
 
+    }
+
+    @Override
+    public boolean cacheIsClear() {
+        return false;
     }
 
     private void generateInstances(List<Sortable> instances, int count, Supplier<Sortable> generator) {

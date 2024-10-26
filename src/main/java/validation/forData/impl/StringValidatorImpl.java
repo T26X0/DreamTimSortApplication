@@ -19,16 +19,6 @@ import static model.repository.constants.EntityPatternsRegex.SOURCE_STRING_PATTE
 
 public class StringValidatorImpl implements StringValidator {
 
-    private final HumanEntityValidator humanEntityValidator;
-    private final BarrelEntityValidator barrelEntityValidator;
-    private final AnimalEntityValidator animalEntityValidator;
-
-    public StringValidatorImpl() {
-        this.humanEntityValidator = new HumanEntityValidatorImpl();
-        this.barrelEntityValidator = new BarrelEntityValidatorImpl();
-        this.animalEntityValidator = new AnimalEntityValidatorImpl();
-    }
-
     @Override
     public void validateSourceString(String source) throws PatternMismatchException {
         Pattern pattern = Pattern.compile(SOURCE_STRING_PATTERN.getPattern(), Pattern.CASE_INSENSITIVE);
