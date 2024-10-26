@@ -1,8 +1,8 @@
 package validation.impl;
 
-import static validation.util.ValidationConstants.EntityConstants.HAS_NO_WOOL;
-import static validation.util.ValidationConstants.EntityConstants.HAS_WOOL;
-import static validation.util.ValidationConstants.RegexPatterns.ANIMAL_PATTERN;
+import static model.repository.constants.ValidationConstants.EntityConstants.HAS_NO_WOOL;
+import static model.repository.constants.ValidationConstants.EntityConstants.HAS_WOOL;
+import static model.repository.constants.ValidationConstants.RegexPatterns.ANIMAL_PATTERN;
 import static validation.util.ValidatorUtil.validateMaxStringLength;
 
 import java.util.regex.Matcher;
