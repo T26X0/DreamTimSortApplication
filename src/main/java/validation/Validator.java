@@ -1,4 +1,7 @@
 package validation;
+
+import static model.repository.constants.EntityConstants.MAX_AGE;
+
 /**
  * Валидатор проверяет корректность данных на соответствие шаблону данных
  * ----------------------------------------------------

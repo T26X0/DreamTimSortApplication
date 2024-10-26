@@ -1,14 +1,13 @@
 package validation.impl;
 
-import static model.repository.constants.ValidationConstants.EntityConstants.GENDER_FEMALE;
-import static model.repository.constants.ValidationConstants.EntityConstants.GENDER_MALE;
-import static model.repository.constants.ValidationConstants.EntityConstants.MAX_AGE;
-import static model.repository.constants.ValidationConstants.RegexPatterns.HUMAN_PATTERN;
+import static model.repository.constants.EntityConstants.*;
+import static model.repository.constants.EntityPatternsRegex.HUMAN_PATTERN;
 import static validation.util.ValidatorUtil.validateMaxPossibleIntValue;
 import static validation.util.ValidatorUtil.validateMaxStringLength;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import validation.Validator;
 import validation.exception.ExceedingPermissibleLengthException;
 import validation.exception.IncorrectAgeException;
@@ -17,11 +16,17 @@ import validation.exception.PatternMismatchException;
 
 public class HumanValidatorImpl implements Validator {
 
+    private final int maxAge = Integer.parseInt(MAX_AGE.getValue());
+
+    private final String genderMale = GENDER_MALE.getValue();
+
+    private final String genderFemale = GENDER_FEMALE.getValue();
+
     @Override
     public void validate(String human)
         throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException, PatternMismatchException {
 
-        Pattern pattern = Pattern.compile(HUMAN_PATTERN, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(HUMAN_PATTERN.getPattern(), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(human);
 
         if (!matcher.matches()) {
@@ -34,14 +39,14 @@ public class HumanValidatorImpl implements Validator {
 
         validateMaxStringLength(name, "Имя");
 
-        if (!validateMaxPossibleIntValue(Age, MAX_AGE)) {
+        if (!validateMaxPossibleIntValue(Age, maxAge)) {
             throw new IncorrectAgeException(String.format(
-                "Возраст не может быть больше %d и меньше 0.", MAX_AGE));
+                "Возраст не может быть больше %d и меньше 0.", maxAge));
         }
 
-        if (!gender.equalsIgnoreCase(GENDER_MALE) && !gender.equalsIgnoreCase(GENDER_FEMALE)) {
+        if (!gender.equalsIgnoreCase(genderMale) && !gender.equalsIgnoreCase(genderFemale)) {
             throw new IncorrectDataTypeException(String.format(
-                "Гендер можеть быть только '%s' или '%s'.", GENDER_MALE, GENDER_FEMALE));
+                "Гендер можеть быть только '%s' или '%s'.", genderMale, genderFemale));
         }
     }
 }

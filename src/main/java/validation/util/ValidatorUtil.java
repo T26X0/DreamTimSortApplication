@@ -1,7 +1,7 @@
 package validation.util;
 
-import static model.repository.constants.ValidationConstants.EntityConstants.MAX_STRING_LENGTH;
 
+import model.repository.constants.EntityConstants;
 import validation.exception.ExceedingPermissibleLengthException;
 
 public interface ValidatorUtil {
@@ -16,9 +16,11 @@ public interface ValidatorUtil {
 
     static void validateMaxStringLength(String string, String fieldName)
         throws ExceedingPermissibleLengthException {
-        if(string.length() > MAX_STRING_LENGTH) {
+        int maxStringLength = Integer.parseInt(EntityConstants.MAX_STRING_LENGTH.getValue());
+
+        if(string.length() > maxStringLength) {
             throw new ExceedingPermissibleLengthException(String.format(
-                "%s не должен превышать %d символов.", fieldName, MAX_STRING_LENGTH));
+                "%s не должен превышать %d символов.", fieldName, maxStringLength));
         }
     }
 }

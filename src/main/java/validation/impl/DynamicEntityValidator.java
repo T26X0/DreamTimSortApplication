@@ -1,12 +1,13 @@
 package validation.impl;
 
-import static model.repository.constants.ValidationConstants.RegexPatterns.SOURCE_STRING_PATTERN;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import validation.SourceStringValidator;
 import validation.Validator;
 import validation.exception.PatternMismatchException;
+
+import static model.repository.constants.EntityPatternsRegex.SOURCE_STRING_PATTERN;
 
 public class DynamicEntityValidator implements Validator, SourceStringValidator {
 
@@ -39,7 +40,7 @@ public class DynamicEntityValidator implements Validator, SourceStringValidator 
 
     @Override
     public void validateSourceString(String source) throws PatternMismatchException {
-        Pattern pattern = Pattern.compile(SOURCE_STRING_PATTERN, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(SOURCE_STRING_PATTERN.getPattern(), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(source);
 
         if(!matcher.matches()) {

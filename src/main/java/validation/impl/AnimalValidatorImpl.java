@@ -1,8 +1,8 @@
 package validation.impl;
 
-import static model.repository.constants.ValidationConstants.EntityConstants.HAS_NO_WOOL;
-import static model.repository.constants.ValidationConstants.EntityConstants.HAS_WOOL;
-import static model.repository.constants.ValidationConstants.RegexPatterns.ANIMAL_PATTERN;
+import static model.repository.constants.EntityConstants.HAS_NO_WOOL;
+import static model.repository.constants.EntityConstants.HAS_WOOL;
+import static model.repository.constants.EntityPatternsRegex.ANIMAL_PATTERN;
 import static validation.util.ValidatorUtil.validateMaxStringLength;
 
 import java.util.regex.Matcher;
@@ -14,11 +14,14 @@ import validation.exception.PatternMismatchException;
 
 public class AnimalValidatorImpl implements Validator {
 
+    private final String hasWoolValue = HAS_WOOL.getValue();
+    private final String hasNoWoolValue = HAS_NO_WOOL.getValue();
+
     @Override
     public void validate(String animal)
         throws ExceedingPermissibleLengthException, IncorrectDataTypeException, PatternMismatchException {
 
-        Pattern pattern = Pattern.compile(ANIMAL_PATTERN, Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(ANIMAL_PATTERN.getPattern(), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(animal);
 
         if (!matcher.matches()) {
@@ -32,9 +35,9 @@ public class AnimalValidatorImpl implements Validator {
         validateMaxStringLength(species, "Вид животного");
         validateMaxStringLength(eyeColor, "Цвет глаз");
 
-        if (!wool.equalsIgnoreCase(HAS_WOOL) && !wool.equalsIgnoreCase(HAS_NO_WOOL)) {
+        if (!wool.equalsIgnoreCase(hasWoolValue) && !wool.equalsIgnoreCase(hasNoWoolValue)) {
             throw new IncorrectDataTypeException(String.format(
-                "Наличие шерсти должно быть '%s' или '%s'.", HAS_WOOL, HAS_NO_WOOL));
+                "Наличие шерсти должно быть '%s' или '%s'.", hasNoWoolValue, hasNoWoolValue));
         }
     }
 }
