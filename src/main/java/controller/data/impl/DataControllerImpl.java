@@ -7,7 +7,9 @@ import controller.data.generation.impl.DataGenerationImpl;
 import model.DataService;
 import model.entity.sortable.Sortable;
 import model.impl.DataServiceImpl;
+import validation.Validator;
 import validation.impl.IsPositive;
+import validation.impl.SourceStringValidatorImpl;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -27,9 +29,24 @@ public class DataControllerImpl implements DataController {
      * Отдает в UserController только ПРОВАЛИДИРОВАННЫЕ данные!
      */
     @Override
-    public List<Sortable> readData() {
+    public List<Sortable> readData() throws Exception {
 
-        return null;
+        String data = dataService.getData();
+
+        Validator validator = new SourceStringValidatorImpl();
+        validator.validate(data);
+
+        String[] processedData = StringProcessor.process(data);
+
+        Validator dynamicEntityValidator = new DynamicEntityValidator();
+
+        for (String dataToValidate : processedData) {
+            dynamicEntityValidator.validate(dataToValidate);
+        }
+
+        DynamicClassCreation dynamicallyCreatedClasses = new DynamicClassCreation();
+
+        return dynamicallyCreatedClasses.creatureClass(processedData);
     }
 
     @Override
