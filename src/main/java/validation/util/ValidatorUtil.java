@@ -1,6 +1,6 @@
 package validation.util;
 
-import static validation.util.ValidationConstants.EntityConstants.MAX_STRING_LENGTH;
+import static model.repository.constants.ValidationConstants.EntityConstants.MAX_STRING_LENGTH;
 
 import validation.exception.ExceedingPermissibleLengthException;
 

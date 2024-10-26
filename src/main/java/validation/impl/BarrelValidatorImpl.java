@@ -1,7 +1,7 @@
 package validation.impl;
 
-import static validation.util.ValidationConstants.EntityConstants.MAX_VOLUME;
-import static validation.util.ValidationConstants.RegexPatterns.BARREL_PATTERN;
+import static model.repository.constants.ValidationConstants.EntityConstants.MAX_VOLUME;
+import static model.repository.constants.ValidationConstants.RegexPatterns.BARREL_PATTERN;
 import static validation.util.ValidatorUtil.validateMaxPossibleIntValue;
 import static validation.util.ValidatorUtil.validateMaxStringLength;
 
