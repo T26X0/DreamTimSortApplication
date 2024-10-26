@@ -1,22 +1,22 @@
-package model.impl;
+package model.service.impl;
 
-import model.DataService;
-import model.repository.DataRepository;
+import model.repository.DataDAO;
 import model.repository.exception.NoSuchFileException;
-import model.repository.impl.DataRepositoryImpl;
+import model.repository.impl.FileDAOImpl;
+import model.service.DataService;
 
 public class DataServiceImpl implements DataService {
 
-    private final DataRepository repository;
+    private final DataDAO dataDAO;
 
     public DataServiceImpl() {
-        repository = new DataRepositoryImpl();
+        dataDAO = new FileDAOImpl();
     }
 
     @Override
     public String getData() {
         try {
-            return repository.getData();
+            return dataDAO.getData();
         } catch (NoSuchFileException e) {
             throw new RuntimeException(e);
         }

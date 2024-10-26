@@ -5,9 +5,9 @@ import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
 import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
-import model.DataService;
+import model.service.DataService;
 import model.entity.sortable.Sortable;
-import model.impl.DataServiceImpl;
+import model.service.impl.DataServiceImpl;
 import validation.impl.IsPositive;
 
 import java.util.*;
