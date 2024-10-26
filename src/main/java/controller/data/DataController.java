@@ -20,4 +20,6 @@ public interface DataController {
     void saveDataInCache(List<Sortable> listData);
 
     void clearCache();
+
+    boolean cacheIsClear();
 }

@@ -4,6 +4,7 @@ import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
 import controller.data.generation.impl.DataGenerationImpl;
+import controller.data.sort.TimSort;
 import model.DataService;
 import model.entity.sortable.Sortable;
 import model.impl.DataServiceImpl;
@@ -69,27 +70,37 @@ public class DataControllerImpl implements DataController {
     @Override
     public List<Sortable> getDataFromCache() {
 
-        return null;
+        return List.copyOf(savedData);
     }
 
     @Override
     public List<Sortable> sortData() {
-        // сортировка всех данных по типу
-        Collections.sort(savedData);
 
-        // сортировка всех данных между собой
-        savedData.sort(GeneralComparatorUtil.getComparatorForSortableEntity());
+        TimSort.timSort(savedData, GeneralComparatorUtil.getComparatorForSortableEntity());
+
         return savedData;
     }
 
     @Override
     public void saveDataInCache(List<Sortable> listData) {
 
+        savedData = List.copyOf(listData);
     }
 
     @Override
     public void clearCache() {
 
+        savedData = null;
+    }
+
+    @Override
+    public boolean cacheIsClear() {
+
+        if (Objects.isNull(savedData)) {
+            return true;
+        }
+
+        return savedData.isEmpty();
     }
 
     private void generateInstances(List<Sortable> instances, int count, Supplier<Sortable> generator) {
