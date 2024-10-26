@@ -5,7 +5,7 @@ import model.repository.exception.NoSuchFileException;
 /**
  * Репозиторий читает данные из файла
  */
-public interface DataRepository {
+public interface DataDAO {
 
     String getData() throws NoSuchFileException;
 }

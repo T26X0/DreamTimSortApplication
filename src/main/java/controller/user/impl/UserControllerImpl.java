@@ -6,12 +6,18 @@ import controller.input.impl.UserInputImpl;
 import controller.user.UserController;
 import controller.user.constants.MenuPoints;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserControllerImpl implements UserController {
 
     private final UserInput userInput;
 
+    private List<Exception> exceptions;
+
     public UserControllerImpl() {
         this.userInput = new UserInputImpl();
+        this.exceptions = new ArrayList<>();
     }
 
     @Override

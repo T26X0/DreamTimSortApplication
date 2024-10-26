@@ -1,4 +1,4 @@
-package model;
+package model.service;
 
 /**
  * Класс для чтения данных из репозитория

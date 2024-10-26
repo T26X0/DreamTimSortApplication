@@ -53,4 +53,6 @@ public class Human implements Sortable {
             return new Human(this);
         }
     }
+
+    public boolean isContainsField(String fieldName);
 }

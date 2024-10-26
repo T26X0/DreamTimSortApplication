@@ -1,4 +1,7 @@
-package validation;
+package validation.forData;
+
+import validation.exception.PatternMismatchException;
+
 /**
  * Валидатор проверяет корректность данных на соответствие шаблону данных
  * ----------------------------------------------------
@@ -17,10 +20,10 @@ package validation;
  *                     "String" -> не больше 30 символов);
  *                     </pre>
  */
-public interface Validator {
+public interface EntityValidator {
     /**
      * Валидация на соответствие общему шаблону производится в первый круг вылидации
      * В нашем случае сразу после прочтения из файла или ввода пользователя
      */
-    void validate(String entity) throws Exception;
+    void validateEntityString(String entity) throws Exception;
 }
