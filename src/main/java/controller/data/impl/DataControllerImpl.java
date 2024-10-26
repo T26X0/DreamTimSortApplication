@@ -3,6 +3,7 @@ package controller.data.impl;
 import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
+import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
 import model.DataService;
 import model.entity.sortable.Sortable;
