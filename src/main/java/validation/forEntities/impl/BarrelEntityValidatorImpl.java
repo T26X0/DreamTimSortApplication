@@ -21,7 +21,7 @@ public class BarrelEntityValidatorImpl implements BarrelEntityValidator {
     StringValidator stringValidator = new StringValidatorImpl();
     IntegerValidator integerValidator = new IntegerValidatorImpl();
 
-    private final String maxValue = MAX_VOLUME.getValue();
+    private final int maxValue = Integer.parseInt(MAX_VOLUME.getValue());
 
     @Override
     public void validateEntityString(String barrel) throws PatternMismatchException, ExceedingPermissibleLengthException, NegativeNumberException, IncorrectAgeException {
@@ -40,9 +40,9 @@ public class BarrelEntityValidatorImpl implements BarrelEntityValidator {
         stringValidator.validateMaxStringLength(storedMaterial);
         stringValidator.validateMaxStringLength(materialOfManufacture);
 
-        integerValidator.validateMaxPossibleIntValue(volume, Integer.parseInt(maxValue)); {
+        integerValidator.validateMaxPossibleIntValue(volume, maxValue); {
             throw new ExceedingPermissibleLengthException(String.format(
-                "Ёмкость бочки не может быть больше %d.", Integer.parseInt(maxValue)));
+                "Ёмкость бочки не может быть больше %d.", maxValue));
         }
     }
 }
