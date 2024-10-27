@@ -7,6 +7,7 @@ import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
 import controller.data.search.binary.exception.EmptyCacheException;
 import controller.data.sort.TimSort;
+import java.util.stream.Collectors;
 import model.entity.Animal;
 import model.entity.Barrel;
 import model.entity.Human;
@@ -114,13 +115,33 @@ public class DataControllerImpl implements DataController {
         return savedData.isEmpty();
     }
 
+    void saveDataToLocalFile() throws EmptyCacheException {
+
+        separateCacheToUniqueLists();
+
+        String animalString = savedAnimals.stream()
+            .map(Animal::toString)
+            .collect(Collectors.joining(""));
+        dataService.saveDataToLocalFile(animalString, "sortedAnimals");
+
+        String barrelString = savedBarrels.stream()
+            .map(Barrel::toString)
+            .collect(Collectors.joining(""));
+        dataService.saveDataToLocalFile(barrelString, "sortedBarrels");
+
+        String humanString = savedHumans.stream()
+            .map(Human::toString)
+            .collect(Collectors.joining(""));
+        dataService.saveDataToLocalFile(humanString, "sortedHumans");
+    }
+
     void separateCacheToUniqueLists() throws EmptyCacheException {
         if(savedData == null)
-            throw new EmptyCacheException("В кэше нет данных.");
+            throw new EmptyCacheException("В кэше нет данных для разделения.");
 
-        savedHumans = null;
-        savedBarrels = null;
-        savedAnimals = null;
+        savedHumans.clear();
+        savedBarrels.clear();
+        savedAnimals.clear();
 
         for (Sortable item : savedData) {
             if (item instanceof Animal) {
