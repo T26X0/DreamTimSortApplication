@@ -7,7 +7,7 @@ import model.entity.sortable.Sortable;
 
 import java.util.Comparator;
 
-public class GeneralComparatorUtil {
+public final class GeneralComparatorUtil {
 
     public static Comparator<Sortable> getComparatorForSortableEntity() {
 

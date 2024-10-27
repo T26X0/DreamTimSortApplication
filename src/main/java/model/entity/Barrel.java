@@ -26,6 +26,11 @@ public class Barrel implements Sortable {
         return -1;
     }
 
+    @Override
+    public String toString() {
+        return String.format("barrel(%d,%s,%s);", value, storedMaterial, materialOfManufacture);
+    }
+
     public static class Builder {
 
         private int value;
