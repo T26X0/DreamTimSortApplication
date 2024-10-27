@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface DataController {
 
-    List<Sortable> readData();
+    List<Sortable> readData() throws Exception;
 
-    List<Sortable> generateData(int limit);
+    List<Sortable> generateData(int limit) throws Exception;
 
     List<Sortable> getDataFromCache();
 
@@ -20,4 +20,6 @@ public interface DataController {
     void saveDataInCache(List<Sortable> listData);
 
     void clearCache();
+
+    boolean cacheIsClear();
 }

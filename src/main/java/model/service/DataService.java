@@ -1,4 +1,6 @@
-package model;
+package model.service;
+
+import java.util.List;
 
 /**
  * Класс для чтения данных из репозитория
@@ -10,4 +12,6 @@ package model;
 public interface DataService {
 
     String getData();
+
+    void saveDataToLocalFile(String dataForSave, String fileName);
 }
