@@ -14,6 +14,7 @@ import model.repository.exception.NoSuchFileException;
 public class FileDAOImpl implements DataDAO {
 
     private final String FILE_PATH = "src/main/resources/file.txt";
+    private final String LOCAL_DIRECTORY_PATH = "src/main/resources/";
 
     @Override
     public String getData() {
@@ -31,7 +32,17 @@ public class FileDAOImpl implements DataDAO {
     @Override
     public void saveDataToLocalFile(String dataForSave, String fileName) {
 
+        String filePath = String.format("src/main/resources/%s.txt", fileName);
+
+        File file = new File(filePath);
+
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.write(dataForSave);
+        } catch (IOException e) {
+            UserController.addException(new IOException("Ошибка при сохранении данных в файл. " + e.getMessage()));
+        }
     }
+
 
     /**
      * Возвращает true если в процессе проверки файла не оказалось и пришлось его создавать
