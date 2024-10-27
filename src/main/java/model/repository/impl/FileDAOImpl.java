@@ -7,7 +7,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 
 import model.repository.exception.NoSuchFileException;
 
@@ -40,6 +39,21 @@ public class FileDAOImpl implements DataDAO {
             fileWriter.write(dataForSave);
         } catch (IOException e) {
             UserController.addException(new IOException("Ошибка при сохранении данных в файл. " + e.getMessage()));
+        }
+    }
+
+    public void clearDataFromLocalDirectory() {
+
+        File directory = new File(LOCAL_DIRECTORY_PATH);
+
+        if (directory.isDirectory()) {
+            File[] files = directory.listFiles();
+
+            if (files != null) {
+                for (File file : files) {
+                    boolean deleted = file.delete();
+                }
+            }
         }
     }
 
