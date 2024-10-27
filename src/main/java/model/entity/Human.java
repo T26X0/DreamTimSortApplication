@@ -53,4 +53,7 @@ public class Human implements Sortable {
             return new Human(this);
         }
     }
+
+    // TODO: t26x0? бинарная сортировки по всем сущностям сразу?
+//    public boolean isContainsField(String fieldName);
 }

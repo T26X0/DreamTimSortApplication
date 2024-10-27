@@ -6,13 +6,15 @@ import controller.data.generation.DataGeneration;
 import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
 import controller.data.sort.TimSort;
-import model.DataService;
 import model.entity.sortable.Sortable;
-import model.impl.DataServiceImpl;
-import validation.Validator;
-import validation.impl.DynamicEntityValidator;
-import validation.impl.IsPositive;
-import validation.impl.SourceStringValidatorImpl;
+import model.service.DataService;
+import model.service.impl.DataServiceImpl;
+import validation.forData.DataValidator;
+import validation.forData.IntegerValidator;
+import validation.forData.impl.DataValidatorImpl;
+import validation.forData.impl.IntegerValidatorImpl;
+import validation.forEntities.EntityValidator;
+import validation.forEntities.impl.EntityValidatorImpl;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -36,15 +38,15 @@ public class DataControllerImpl implements DataController {
 
         String data = dataService.getData();
 
-        Validator validator = new SourceStringValidatorImpl();
-        validator.validate(data);
+        DataValidator dataValidator = new DataValidatorImpl();
+        dataValidator.validateSourceString(data);
 
         String[] processedData = StringProcessor.process(data);
 
-        Validator dynamicEntityValidator = new DynamicEntityValidator();
+        EntityValidator entityValidator = new EntityValidatorImpl();
 
         for (String dataToValidate : processedData) {
-            dynamicEntityValidator.validate(dataToValidate);
+            entityValidator.validationEntityString(dataToValidate);
         }
 
         DynamicClassCreation dynamicallyCreatedClasses = new DynamicClassCreation();
@@ -55,15 +57,16 @@ public class DataControllerImpl implements DataController {
     @Override
     public List<Sortable> generateData(int limit) throws Exception {
 
-        IsPositive.validate(limit);
+        IntegerValidator integerValidator = new IntegerValidatorImpl();
+        integerValidator.isPositive(limit);
 
         List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
         List<Sortable> instances = new ArrayList<>();
         DataGeneration dataGen = new DataGenerationImpl();
 
-        generateInstances(instances, parts.get(0), dataGen::getRandomAnimal);
-        generateInstances(instances, parts.get(1), dataGen::getRandomBarrel);
-        generateInstances(instances, parts.get(2), dataGen::getRandomHuman);
+//        generateInstances(instances, parts.get(0), dataGen::getRandomAnimal);
+//        generateInstances(instances, parts.get(1), dataGen::getRandomBarrel);
+//        generateInstances(instances, parts.get(2), dataGen::getRandomHuman);
 
         return instances;
     }
