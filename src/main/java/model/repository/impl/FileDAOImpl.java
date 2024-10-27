@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 import model.repository.exception.NoSuchFileException;
 
@@ -30,6 +31,7 @@ public class FileDAOImpl implements DataDAO {
 
     @Override
     public void saveDataToLocalFile(String dataForSave, String fileName) {
+
 
         String filePath = String.format("src/main/resources/%s.txt", fileName);
 
@@ -56,7 +58,6 @@ public class FileDAOImpl implements DataDAO {
             }
         }
     }
-
 
     /**
      * Возвращает true если в процессе проверки файла не оказалось и пришлось его создавать

@@ -3,15 +3,16 @@ package controller.data.impl;
 import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
-import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
 import controller.data.search.binary.exception.EmptyCacheException;
 import controller.data.sort.TimSort;
+
 import java.util.stream.Collectors;
 import lombok.Getter;
 import model.entity.Animal;
 import model.entity.Barrel;
 import model.entity.Human;
+
 import model.entity.sortable.Sortable;
 import model.service.DataService;
 import model.service.impl.DataServiceImpl;
@@ -72,15 +73,9 @@ public class DataControllerImpl implements DataController {
         IntegerValidator integerValidator = new IntegerValidatorImpl();
         integerValidator.isPositive(limit);
 
-        List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
-        List<Sortable> instances = new ArrayList<>();
-        DataGeneration dataGen = new DataGenerationImpl();
+        DataGeneration generatedData = new DataGenerationImpl();
 
-//        generateInstances(instances, parts.get(0), dataGen::getRandomAnimal);
-//        generateInstances(instances, parts.get(1), dataGen::getRandomBarrel);
-//        generateInstances(instances, parts.get(2), dataGen::getRandomHuman);
-
-        return instances;
+        return generatedData.getRandomClassList(limit);
     }
 
     @Override
