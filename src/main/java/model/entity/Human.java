@@ -26,6 +26,11 @@ public class Human implements Sortable {
         return 1;
     }
 
+    @Override
+    public String toString() {
+        return String.format("human(%s,%d,%s);", gender, age, surname);
+    }
+
     public static class Builder {
 
         private int age;

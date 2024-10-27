@@ -1,5 +1,8 @@
 package model.entity;
 
+import static model.repository.constants.EntityConstants.HAS_NO_WOOL;
+import static model.repository.constants.EntityConstants.HAS_WOOL;
+
 import lombok.Getter;
 import model.entity.sortable.Sortable;
 
@@ -25,6 +28,11 @@ public class Animal implements Sortable {
         if (o instanceof Animal) return 0;
         if (o instanceof Barrel) return 1;
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("animal(%s,%s,%s);", species, eyeColor, hair ? HAS_WOOL : HAS_NO_WOOL);
     }
 
     public static class Builder {
