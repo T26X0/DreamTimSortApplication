@@ -20,7 +20,7 @@ public class UserInputImpl implements UserInput {
         if (ifContains.isPresent()) {
             return ifContains.get();
         }
-        throw  new NotExistCommandException("Нет команды");
+        throw new NotExistCommandException("Нет команды");
     }
 
     @Override
