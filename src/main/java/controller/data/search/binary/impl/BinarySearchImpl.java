@@ -22,7 +22,7 @@ public class BinarySearchImpl implements BinarySearch<Sortable> {
     @Override
     public Sortable findEntity(EntityPatternsRegex entityPattern) throws EmptyCacheException {
         Sortable result = null;
-        if (cacheIsClear()) throw new EmptyCacheException("Кэш приложения пуст.");
+        if (dataController.cacheIsClear()) throw new EmptyCacheException("Кэш приложения пуст.");
         switch (entityPattern) {
             case BARREL_PATTERN -> {
             }
@@ -38,13 +38,5 @@ public class BinarySearchImpl implements BinarySearch<Sortable> {
     public List<Sortable> findByField(String field) {
 
         return null;
-    }
-
-    private boolean cacheIsClear() {
-        List<Sortable> dataFromCache = dataController.getDataFromCache();
-        if (Objects.isNull(dataFromCache)) {
-            return true;
-        }
-        return dataFromCache.isEmpty();
     }
 }
