@@ -1,14 +1,15 @@
 package controller.data.search.byEntity;
 
 import model.entity.Barrel;
+import model.entity.sortable.Sortable;
 
 import java.util.List;
 
 public interface SearchBarrel {
 
-    List<Barrel> findAllByValue(int value);
+    List<Barrel> findAllByValue(List<Sortable> searchList, int value);
 
-    List<Barrel> findAllByStoredMaterial(String storeMaterial);
+    List<Barrel> findAllByStoredMaterial(List<Sortable> searchList, String storeMaterial);
 
-    List<Barrel> findAllByMaterialOfManufacture(String materialOfManufacture);
+    List<Barrel> findAllByMaterialOfManufacture(List<Sortable> searchList, String materialOfManufacture);
 }
