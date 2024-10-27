@@ -18,9 +18,8 @@ public enum MenuPoints {
 
     @Getter
     private final String pointId;
-    private final String pointName;
 
-    MenuPoints(String pointId, String pointName) {
+    MenuPoints(int pointId, String pointName) {
         this.pointId = pointId;
         this.pointName = pointName;
     }
