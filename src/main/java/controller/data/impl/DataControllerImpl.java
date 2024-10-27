@@ -28,7 +28,7 @@ import java.util.function.Supplier;
 
 public class DataControllerImpl implements DataController {
 
-    private List<Sortable> savedData = null;
+    private List<Sortable> cache = null;
     @Getter
     private List<Animal> savedAnimals = new ArrayList<>();
     @Getter
@@ -50,21 +50,7 @@ public class DataControllerImpl implements DataController {
     public List<Sortable> readData() throws Exception {
 
         String data = dataService.getData();
-
-        DataValidator dataValidator = new DataValidatorImpl();
-        dataValidator.validateSourceString(data);
-
-        String[] processedData = StringProcessor.process(data);
-
-        EntityValidator entityValidator = new EntityValidatorImpl();
-
-        for (String dataToValidate : processedData) {
-            entityValidator.validationEntityString(dataToValidate);
-        }
-
-        DynamicClassCreation dynamicallyCreatedClasses = new DynamicClassCreation();
-
-        return dynamicallyCreatedClasses.creatureClass(processedData);
+        return convertStringToSortableList(data);
     }
 
     @Override
@@ -75,43 +61,66 @@ public class DataControllerImpl implements DataController {
 
         DataGeneration generatedData = new DataGenerationImpl();
 
-        return generatedData.getRandomClassList(limit);
+        cache = generatedData.getRandomClassList(limit);
+        return List.copyOf(cache);
     }
 
     @Override
     public List<Sortable> getDataFromCache() {
 
-        return List.copyOf(savedData);
+        return List.copyOf(cache);
     }
 
     @Override
     public List<Sortable> sortData() {
 
-        TimSort.timSort(savedData, GeneralComparatorUtil.getComparatorForSortableEntity());
+        TimSort.timSort(cache, GeneralComparatorUtil.getComparatorForSortableEntity());
 
-        return savedData;
+        return cache;
     }
 
     @Override
     public void saveDataInCache(List<Sortable> listData) {
 
-        savedData = List.copyOf(listData);
+        cache = List.copyOf(listData);
     }
 
     @Override
     public void clearCache() {
 
-        savedData = null;
+        cache = null;
     }
 
     @Override
     public boolean cacheIsClear() {
 
-        if (Objects.isNull(savedData)) {
+        if (Objects.isNull(cache)) {
             return true;
         }
 
-        return savedData.isEmpty();
+        return cache.isEmpty();
+    }
+
+    @Override
+    public void clearDataFromLocalDirectory() {
+        dataService.clearDataFromLocalDirectory();
+    }
+
+    @Override
+    public List<Sortable> convertStringToSortableList(String string) throws Exception {
+        DataValidator dataValidator = new DataValidatorImpl();
+        dataValidator.validateSourceString(string);
+
+        String[] processedData = StringProcessor.process(string);
+
+        EntityValidator entityValidator = new EntityValidatorImpl();
+
+        for (String dataToValidate : processedData) {
+            entityValidator.validationEntityString(dataToValidate);
+        }
+
+        DynamicClassCreation dynamicallyCreatedClasses = new DynamicClassCreation();
+        return dynamicallyCreatedClasses.creatureClass(processedData);
     }
 
     public void saveDataToLocalFile() throws EmptyCacheException {
@@ -135,14 +144,14 @@ public class DataControllerImpl implements DataController {
     }
 
     private void separateCacheToUniqueLists() throws EmptyCacheException {
-        if(savedData == null)
+        if(cache == null)
             throw new EmptyCacheException("В кэше нет данных для разделения.");
 
         savedHumans.clear();
         savedBarrels.clear();
         savedAnimals.clear();
 
-        for (Sortable item : savedData) {
+        for (Sortable item : cache) {
             if (item instanceof Animal) {
                 savedAnimals.add((Animal) item);
             } else if (item instanceof Barrel) {

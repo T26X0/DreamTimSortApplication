@@ -22,4 +22,8 @@ public interface DataController {
     void clearCache();
 
     boolean cacheIsClear();
+
+    void clearDataFromLocalDirectory();
+
+    List<Sortable> convertStringToSortableList(String string) throws Exception;
 }
