@@ -118,6 +118,10 @@ public class DataControllerImpl implements DataController {
         if(savedData == null)
             throw new EmptyCacheException("В кэше нет данных.");
 
+        savedHumans = null;
+        savedBarrels = null;
+        savedAnimals = null;
+
         for (Sortable item : savedData) {
             if (item instanceof Animal) {
                 savedAnimals.add((Animal) item);
