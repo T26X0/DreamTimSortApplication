@@ -3,6 +3,7 @@ package controller.data.impl;
 import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
+import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
 import model.entity.sortable.Sortable;
 import model.service.DataService;
@@ -39,18 +40,14 @@ public class DataControllerImpl implements DataController {
     public List<Sortable> generateData(int limit) throws Exception {
 
         integerValidator.isPositive(limit);
+        List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
+        List<Sortable> instances = new ArrayList<>();
         DataGeneration dataGen = new DataGenerationImpl();
-        return dataGen.getRandomClassList(limit);
 
-
-        // TODO: Обсудить и корректно использовать методы генератора
-//        List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
-//        List<Sortable> instances = new ArrayList<>();
-//        generateInstances(instances, parts.get(0), dataGen::getRandomAnimal);
+//        generateInstances(instances, parts.get(dataGen::getRandomAnimal);
 //        generateInstances(instances, parts.get(1), dataGen::getRandomBarrel);
 //        generateInstances(instances, parts.get(2), dataGen::getRandomHuman);
-//        return instances;
-
+        return instances;
     }
 
     @Override
