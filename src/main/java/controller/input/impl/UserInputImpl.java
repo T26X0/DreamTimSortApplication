@@ -16,9 +16,6 @@ public class UserInputImpl implements UserInput {
 
     @Override
     public MenuPoints getCommand() throws NotExistCommandException {
-//        for (MenuPoints points : MenuPoints.values()){
-//            System.out.println(points.getPointId());
-//        }
         Optional<MenuPoints> ifContains = MenuPoints.getIfContains(getInput());
         if (ifContains.isPresent()) {
             return ifContains.get();
