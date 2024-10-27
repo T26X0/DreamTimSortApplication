@@ -10,16 +10,15 @@ import java.util.Scanner;
 public class UserInputImpl implements UserInput {
 
     private String getInput() {
-        System.out.print("Введите команду: ");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
     @Override
     public MenuPoints getCommand() throws NotExistCommandException {
-        for (MenuPoints points : MenuPoints.values()){
-            System.out.println(points.getPointId());
-        }
+//        for (MenuPoints points : MenuPoints.values()){
+//            System.out.println(points.getPointId());
+//        }
         Optional<MenuPoints> ifContains = MenuPoints.getIfContains(getInput());
         if (ifContains.isPresent()) {
             return ifContains.get();
@@ -27,13 +26,8 @@ public class UserInputImpl implements UserInput {
         throw  new NotExistCommandException("Нет команды");
     }
 
-    /**
-     * Возвращает только ПРОВАЛИДИРОВАННЫЕ данные
-     */
     @Override
     public String getDataFromUserInput() {
-        System.out.print("Введите данные: ");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        return getInput();
     }
 }
