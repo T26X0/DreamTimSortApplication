@@ -28,20 +28,16 @@ public class UserControllerImpl implements UserController {
     public void startTrackingUserAction() {
         while (true) {
             userDisplay.show();
-            MenuPoints command = null;
-
-            while (command == null) {
-                try {
-                    command = userInput.getCommand();
-                    System.out.println("Command: " + command);
-                } catch (NotExistCommandException e) {
-                    System.out.println("Ошибка: " + e.getMessage());
-                    // TODO: t26x0 -> здесь должна быть "адекватная" обработка исключения
-                }
+            MenuPoints command;
+            try {
+                command = userInput.getCommand();
+                System.out.println("Command: " + command);
+            } catch (NotExistCommandException e) {
+                System.out.println("Ошибка: " + e.getMessage());
+                continue;
             }
 
             executeCommand(command);
-
         }
     }
 
