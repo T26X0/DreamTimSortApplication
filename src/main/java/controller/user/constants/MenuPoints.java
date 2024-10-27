@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
+@Getter
 public enum MenuPoints {
 
     READING_DATA_FROM_FILE("1", "1. Прочитать данные из файла"),
@@ -16,15 +17,14 @@ public enum MenuPoints {
     RESET_FILE_FOR_DATA("6", "6. Сбросить рабочую директорию"),
     EXIT("7", "7. Выйти из программы");
 
-    @Getter
     private final String pointId;
 
-    MenuPoints(int pointId, String pointName) {
+    private final String pointName;
+
+    MenuPoints(String pointId, String pointName) {
         this.pointId = pointId;
         this.pointName = pointName;
     }
-
-    public String getPointId(){ return pointId; }
 
     public static Optional<MenuPoints> getIfContains(String command) {
         return Arrays.stream(MenuPoints.values())

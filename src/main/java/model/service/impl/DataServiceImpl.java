@@ -1,9 +1,10 @@
 package model.service.impl;
 
 import model.repository.DataDAO;
-import model.repository.exception.NoSuchFileException;
 import model.repository.impl.FileDAOImpl;
 import model.service.DataService;
+
+import java.util.List;
 
 public class DataServiceImpl implements DataService {
 
@@ -15,10 +16,11 @@ public class DataServiceImpl implements DataService {
 
     @Override
     public String getData() {
-        try {
-            return dataDAO.getData();
-        } catch (NoSuchFileException e) {
-            throw new RuntimeException(e);
-        }
+        return dataDAO.getData();
+    }
+
+    @Override
+    public void saveDataToLocalFile(String dataForSave, String fileName) {
+        dataDAO.saveDataToLocalFile(dataForSave, fileName);
     }
 }

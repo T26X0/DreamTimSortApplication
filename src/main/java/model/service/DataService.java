@@ -1,5 +1,7 @@
 package model.service;
 
+import java.util.List;
+
 /**
  * Класс для чтения данных из репозитория
  В нашем случае репозиторий это .txt файл,
@@ -10,4 +12,6 @@ package model.service;
 public interface DataService {
 
     String getData();
+
+    void saveDataToLocalFile(String dataForSave, String fileName);
 }

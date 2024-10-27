@@ -1,11 +1,13 @@
 package model.repository;
 
-import model.repository.exception.NoSuchFileException;
+import java.util.List;
 
 /**
  * Репозиторий читает данные из файла
  */
 public interface DataDAO {
 
-    String getData() throws NoSuchFileException;
+    String getData();
+
+    void saveDataToLocalFile(String dataForSave, String fileName);
 }
