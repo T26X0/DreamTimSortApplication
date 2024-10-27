@@ -5,11 +5,16 @@ import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
 import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
+import controller.data.sort.TimSort;
 import model.entity.sortable.Sortable;
 import model.service.DataService;
 import model.service.impl.DataServiceImpl;
+import validation.forData.DataValidator;
 import validation.forData.IntegerValidator;
+import validation.forData.impl.DataValidatorImpl;
 import validation.forData.impl.IntegerValidatorImpl;
+import validation.forEntities.EntityValidator;
+import validation.forEntities.impl.EntityValidatorImpl;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -20,8 +25,6 @@ public class DataControllerImpl implements DataController {
 
     private final DataService dataService;
 
-    private final IntegerValidator integerValidator = new IntegerValidatorImpl();
-
     public DataControllerImpl() {
 
         this.dataService = new DataServiceImpl();
@@ -31,54 +34,77 @@ public class DataControllerImpl implements DataController {
      * Отдает в UserController только ПРОВАЛИДИРОВАННЫЕ данные!
      */
     @Override
-    public List<Sortable> readData() {
+    public List<Sortable> readData() throws Exception {
 
-        return null;
+        String data = dataService.getData();
+
+        DataValidator dataValidator = new DataValidatorImpl();
+        dataValidator.validateSourceString(data);
+
+        String[] processedData = StringProcessor.process(data);
+
+        EntityValidator entityValidator = new EntityValidatorImpl();
+
+        for (String dataToValidate : processedData) {
+            entityValidator.validationEntityString(dataToValidate);
+        }
+
+        DynamicClassCreation dynamicallyCreatedClasses = new DynamicClassCreation();
+
+        return dynamicallyCreatedClasses.creatureClass(processedData);
     }
 
     @Override
     public List<Sortable> generateData(int limit) throws Exception {
 
+        IntegerValidator integerValidator = new IntegerValidatorImpl();
         integerValidator.isPositive(limit);
+
         List<Integer> parts = NumberGeneratorUtil.generateParts(limit);
         List<Sortable> instances = new ArrayList<>();
         DataGeneration dataGen = new DataGenerationImpl();
 
-//        generateInstances(instances, parts.get(dataGen::getRandomAnimal);
+//        generateInstances(instances, parts.get(0), dataGen::getRandomAnimal);
 //        generateInstances(instances, parts.get(1), dataGen::getRandomBarrel);
 //        generateInstances(instances, parts.get(2), dataGen::getRandomHuman);
+
         return instances;
     }
 
     @Override
     public List<Sortable> getDataFromCache() {
 
-        return null;
+        return List.copyOf(savedData);
     }
 
     @Override
     public List<Sortable> sortData() {
-        // сортировка всех данных по типу
-        Collections.sort(savedData);
 
-        // сортировка всех данных между собой
-        savedData.sort(GeneralComparatorUtil.getComparatorForSortableEntity());
+        TimSort.timSort(savedData, GeneralComparatorUtil.getComparatorForSortableEntity());
+
         return savedData;
     }
 
     @Override
     public void saveDataInCache(List<Sortable> listData) {
 
+        savedData = List.copyOf(listData);
     }
 
     @Override
     public void clearCache() {
 
+        savedData = null;
     }
 
     @Override
     public boolean cacheIsClear() {
-        return false;
+
+        if (Objects.isNull(savedData)) {
+            return true;
+        }
+
+        return savedData.isEmpty();
     }
 
     private void generateInstances(List<Sortable> instances, int count, Supplier<Sortable> generator) {

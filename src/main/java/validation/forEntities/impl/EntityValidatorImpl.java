@@ -4,9 +4,9 @@ import validation.exception.PatternMismatchException;
 import validation.forEntities.AnimalEntityValidator;
 import validation.forEntities.BarrelEntityValidator;
 import validation.forEntities.HumanEntityValidator;
-import validation.forEntities.Validator;
+import validation.forEntities.EntityValidator;
 
-public class ValidatorImpl implements Validator {
+public class EntityValidatorImpl implements EntityValidator {
 
     private BarrelEntityValidator barrelValidator = new BarrelEntityValidatorImpl();
     private AnimalEntityValidator animalValidator = new AnimalEntityValidatorImpl();
