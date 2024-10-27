@@ -5,7 +5,11 @@ import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
 import controller.data.generation.NumberGeneratorUtil;
 import controller.data.generation.impl.DataGenerationImpl;
+import controller.data.search.binary.exception.EmptyCacheException;
 import controller.data.sort.TimSort;
+import model.entity.Animal;
+import model.entity.Barrel;
+import model.entity.Human;
 import model.entity.sortable.Sortable;
 import model.service.DataService;
 import model.service.impl.DataServiceImpl;
@@ -22,6 +26,9 @@ import java.util.function.Supplier;
 public class DataControllerImpl implements DataController {
 
     private List<Sortable> savedData = null;
+    List<Animal> savedAnimals = new ArrayList<>();
+    List<Barrel> savedBarrels = new ArrayList<>();
+    List<Human> savedHumans = new ArrayList<>();
 
     private final DataService dataService;
 
@@ -105,6 +112,21 @@ public class DataControllerImpl implements DataController {
         }
 
         return savedData.isEmpty();
+    }
+
+    void separateCacheToUniqueLists() throws EmptyCacheException {
+        if(savedData == null)
+            throw new EmptyCacheException("В кэше нет данных.");
+
+        for (Sortable item : savedData) {
+            if (item instanceof Animal) {
+                savedAnimals.add((Animal) item);
+            } else if (item instanceof Barrel) {
+                savedBarrels.add((Barrel) item);
+            } else if (item instanceof Human) {
+                savedHumans.add((Human) item);
+            }
+        }
     }
 
     private void generateInstances(List<Sortable> instances, int count, Supplier<Sortable> generator) {
