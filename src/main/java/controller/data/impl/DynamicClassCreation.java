@@ -50,7 +50,7 @@ public class DynamicClassCreation {
 
         String species = parts[0].trim();
         String eyeColor = parts[1].trim();
-        boolean hair = Boolean.parseBoolean(parts[2].trim());
+        boolean hair = "yes".equalsIgnoreCase(parts[2].trim());
 
         return new Animal.Builder()
                 .species(species)
