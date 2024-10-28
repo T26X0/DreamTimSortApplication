@@ -6,6 +6,9 @@ import static model.constants.EntityConstants.HAS_WOOL;
 import lombok.Getter;
 import model.entity.sortable.Sortable;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Animal implements Sortable {
 
     @Getter
@@ -33,6 +36,11 @@ public class Animal implements Sortable {
     @Override
     public String toString() {
         return String.format("animal(%s,%s,%s);", species, eyeColor, hair ? HAS_WOOL.getValue() : HAS_NO_WOOL.getValue());
+    }
+
+    @Override
+    public List<String> getAllFieldToStringList() {
+        return List.of(species, eyeColor, (hair ? "yes" : "no"));
     }
 
     public static class Builder {
