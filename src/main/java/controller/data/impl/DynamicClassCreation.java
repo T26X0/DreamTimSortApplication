@@ -34,8 +34,8 @@ public class DynamicClassCreation {
         String[] parts = extractInnerData(data);
 
         int age = Integer.parseInt(parts[1].trim());
-        String gender = parts[2].trim();
-        String surname = parts[0].trim();
+        String gender = parts[0].trim();
+        String surname = parts[2].trim();
 
         return new Human.Builder()
                 .age(age)
