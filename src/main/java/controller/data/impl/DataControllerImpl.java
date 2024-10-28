@@ -16,6 +16,7 @@ import model.entity.Human;
 import model.entity.sortable.Sortable;
 import model.service.DataService;
 import model.service.impl.DataServiceImpl;
+import validation.exception.PatternMismatchException;
 import validation.forData.DataValidator;
 import validation.forData.IntegerValidator;
 import validation.forData.impl.DataValidatorImpl;
@@ -50,6 +51,7 @@ public class DataControllerImpl implements DataController {
     public List<Sortable> readData() throws Exception {
 
         String data = dataService.getData();
+        if (data.isEmpty()) throw new PatternMismatchException("Исходный файл пуст.");
         return convertStringToSortableList(data);
     }
 
