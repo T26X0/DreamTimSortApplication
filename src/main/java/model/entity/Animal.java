@@ -1,7 +1,7 @@
 package model.entity;
 
-import static model.repository.constants.EntityConstants.HAS_NO_WOOL;
-import static model.repository.constants.EntityConstants.HAS_WOOL;
+import static model.constants.EntityConstants.HAS_NO_WOOL;
+import static model.constants.EntityConstants.HAS_WOOL;
 
 import lombok.Getter;
 import model.entity.sortable.Sortable;

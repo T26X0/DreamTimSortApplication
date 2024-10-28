@@ -3,15 +3,13 @@ package controller.data.search.binary.impl;
 import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.impl.DataControllerImpl;
-import controller.data.search.binary.BinarySearch;
 import controller.data.search.binary.exception.EmptyCacheException;
 import model.entity.Animal;
 import model.entity.sortable.Sortable;
-import model.repository.constants.EntityPatternsRegex;
+import model.constants.EntityPatternsRegex;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 public class BinarySearchImpl<T>
 //        implements BinarySearch<Sortable>
