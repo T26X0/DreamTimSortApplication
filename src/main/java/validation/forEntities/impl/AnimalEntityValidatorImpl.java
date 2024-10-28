@@ -31,7 +31,7 @@ public class AnimalEntityValidatorImpl implements AnimalEntityValidator {
 
         Pattern pattern = Pattern.compile(FIELD_PATTERN.getPattern());
         Matcher matcher = pattern.matcher(animal);
-        List<String> list = new ArrayList<>();K
+        List<String> list = new ArrayList<>();
         if (matcher.find()) {
             list = List.of(matcher.group(1).split("\\s*,\\s*"));
         }
