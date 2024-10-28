@@ -32,7 +32,7 @@ public class Animal implements Sortable {
 
     @Override
     public String toString() {
-        return String.format("animal(%s,%s,%s);", species, eyeColor, hair ? HAS_WOOL : HAS_NO_WOOL);
+        return String.format("animal(%s,%s,%s);", species, eyeColor, hair ? HAS_WOOL.getValue() : HAS_NO_WOOL.getValue());
     }
 
     public static class Builder {

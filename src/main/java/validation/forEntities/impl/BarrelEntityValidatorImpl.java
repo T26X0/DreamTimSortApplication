@@ -42,9 +42,6 @@ public class BarrelEntityValidatorImpl implements BarrelEntityValidator {
         stringValidator.validateMaxStringLength(storedMaterial);
         stringValidator.validateMaxStringLength(materialOfManufacture);
 
-        integerValidator.validateMaxPossibleIntValue(volume, maxValue); {
-            throw new ExceedingPermissibleLengthException(String.format(
-                "Ёмкость бочки не может быть больше %d.", maxValue));
-        }
+        integerValidator.validateMaxPossibleIntValue(volume, maxValue);
     }
 }

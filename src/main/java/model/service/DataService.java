@@ -14,4 +14,6 @@ public interface DataService {
     String getData();
 
     void saveDataToLocalFile(String dataForSave, String fileName);
+
+    void clearDataFromLocalDirectory();
 }

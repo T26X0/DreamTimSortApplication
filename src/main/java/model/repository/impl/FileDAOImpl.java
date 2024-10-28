@@ -44,6 +44,7 @@ public class FileDAOImpl implements DataDAO {
         }
     }
 
+    @Override
     public void clearDataFromLocalDirectory() {
 
         File directory = new File(LOCAL_DIRECTORY_PATH);

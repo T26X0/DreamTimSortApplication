@@ -23,4 +23,9 @@ public class DataServiceImpl implements DataService {
     public void saveDataToLocalFile(String dataForSave, String fileName) {
         dataDAO.saveDataToLocalFile(dataForSave, fileName);
     }
+
+    @Override
+    public void clearDataFromLocalDirectory() {
+        dataDAO.clearDataFromLocalDirectory();
+    }
 }
