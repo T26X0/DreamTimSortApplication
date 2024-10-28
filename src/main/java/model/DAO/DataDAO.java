@@ -1,6 +1,4 @@
-package model.repository;
-
-import java.util.List;
+package model.DAO;
 
 /**
  * Репозиторий читает данные из файла

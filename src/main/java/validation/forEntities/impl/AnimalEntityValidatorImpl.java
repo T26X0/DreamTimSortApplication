@@ -1,13 +1,11 @@
 package validation.forEntities.impl;
 
-import static model.repository.constants.EntityConstants.HAS_NO_WOOL;
-import static model.repository.constants.EntityConstants.HAS_WOOL;
-import static model.repository.constants.EntityPatternsRegex.ANIMAL_PATTERN;
+import static model.constants.EntityConstants.HAS_NO_WOOL;
+import static model.constants.EntityConstants.HAS_WOOL;
 
-import static model.repository.constants.EntityPatternsRegex.FIELD_PATTERN;
+import static model.constants.EntityPatternsRegex.FIELD_PATTERN;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import java.util.regex.Matcher;

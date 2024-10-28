@@ -15,7 +15,9 @@ public enum MenuPoints {
     SORTING_DATA_FROM_CACHE("4", "4. Сортировать сохраненные в кэше данные"),
     RESET_CACHE("5", "5. Сбрость кэш"),
     RESET_FILE_FOR_DATA("6", "6. Сбросить рабочую директорию"),
-    EXIT("7", "7. Выйти из программы");
+    SHOW_FULL_CACHE("7", "7. Отобразить весь кэш"),
+    SHOW_ALL_LISTS_WITH_SORTED_DATA_BY_ENTITY("8", "8. Отобразить списки с сущностями"),
+    EXIT("9", "9. Выйти из программы");
 
     private final String pointId;
 

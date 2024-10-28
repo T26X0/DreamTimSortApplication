@@ -1,10 +1,8 @@
 package validation.forEntities.impl;
 
-import static model.repository.constants.EntityConstants.*;
-import static model.repository.constants.EntityPatternsRegex.HUMAN_PATTERN;
+import static model.constants.EntityConstants.*;
 
-import static model.repository.constants.EntityPatternsRegex.FIELD_PATTERN;
-import static model.repository.constants.EntityPatternsRegex.HUMAN_PATTERN;
+import static model.constants.EntityPatternsRegex.FIELD_PATTERN;
 
 import java.util.ArrayList;
 import java.util.List;

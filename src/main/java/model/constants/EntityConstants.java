@@ -1,4 +1,4 @@
-package model.repository.constants;
+package model.constants;
 
 import lombok.Getter;
 

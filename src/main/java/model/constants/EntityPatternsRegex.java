@@ -1,4 +1,4 @@
-package model.repository.constants;
+package model.constants;
 
 public enum EntityPatternsRegex {
     SOURCE_STRING_PATTERN("(?i)^\\s*(?:[a-zA-Z][a-zA-Z0-9]*\\(\\s*(?:[a-zA-Z0-9-]+|[0-9-]+)\\s*,\\s*(?:[a-zA-Z0-9-]+|[0-9-]+)\\s*,\\s*(?:[a-zA-Z0-9-]+|[0-9-]+)\\s*\\);?\\s*)+$"),

@@ -3,6 +3,9 @@ package model.entity;
 import lombok.Getter;
 import model.entity.sortable.Sortable;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Human implements Sortable {
 
     @Getter
@@ -29,6 +32,11 @@ public class Human implements Sortable {
     @Override
     public String toString() {
         return String.format("human(%s,%d,%s);", gender, age, surname);
+    }
+
+    @Override
+    public List<String> getAllFieldToStringList() {
+        return List.of(String.valueOf(age), gender, surname);
     }
 
     public static class Builder {

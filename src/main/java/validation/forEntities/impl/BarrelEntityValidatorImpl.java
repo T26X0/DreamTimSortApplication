@@ -1,8 +1,7 @@
 package validation.forEntities.impl;
 
-import static model.repository.constants.EntityConstants.MAX_VOLUME;
-import static model.repository.constants.EntityPatternsRegex.BARREL_PATTERN;
-import static model.repository.constants.EntityPatternsRegex.FIELD_PATTERN;
+import static model.constants.EntityConstants.MAX_VOLUME;
+import static model.constants.EntityPatternsRegex.FIELD_PATTERN;
 
 import java.util.ArrayList;
 import java.util.List;
