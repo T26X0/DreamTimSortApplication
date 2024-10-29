@@ -6,6 +6,7 @@ import controller.data.generation.DataGeneration;
 import controller.data.generation.impl.DataGenerationImpl;
 import controller.data.search.binary.exception.EmptyCacheException;
 import controller.data.sort.TimSort;
+import controller.data.sort.impl.TimSortImpl;
 
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -41,9 +42,12 @@ public class DataControllerImpl implements DataController {
 
     private final DataService dataService;
 
+    private final TimSort<Sortable> timSort;
+
     public DataControllerImpl() {
 
         this.dataService = new DataServiceImpl();
+        this.timSort = new TimSortImpl<>();
     }
 
     /**
@@ -79,7 +83,7 @@ public class DataControllerImpl implements DataController {
     @Override
     public List<Sortable> sortData() {
 
-        List<Sortable> sortables = TimSort.timSort(cache, GeneralComparatorUtil.getComparatorForSortableEntity());
+        List<Sortable> sortables = timSort.sort(cache, GeneralComparatorUtil.getComparatorForSortableEntity());
         setCache(sortables);
         return cache;
     }
