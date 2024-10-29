@@ -13,11 +13,12 @@ public enum MenuPoints {
     CREATING_RAND_DATA("2", "2. Создать рандомные данные"),
     ENTERING_DATA_IN_TERMINAL("3", "3. Ввести данные из терминала"),
     SORTING_DATA_FROM_CACHE("4", "4. Сортировать сохраненные в кэше данные"),
-    RESET_CACHE("5", "5. Сбросить кэш"),
-    RESET_FILE_FOR_DATA("6", "6. Сбросить рабочую директорию"),
-    SHOW_FULL_CACHE("7", "7. Отобразить весь кэш"),
-    SHOW_ALL_LISTS_WITH_SORTED_DATA_BY_ENTITY("8", "8. Отобразить списки с сущностями"),
-    EXIT("9", "9. Выйти из программы");
+    SAVE_IN_FILE("5", "5. Сбросить кэш"),
+    RESET_CACHE("6", "6. Сбросить кэш"),
+    RESET_FILE_FOR_DATA("7", "7. Сбросить рабочую директорию"),
+    SHOW_FULL_CACHE("8", "8. Отобразить весь кэш"),
+    SHOW_ALL_LISTS_WITH_SORTED_DATA_BY_ENTITY("9", "9. Отобразить списки с сущностями"),
+    EXIT("10", "10. Выйти из программы");
 
     private final String pointId;
 

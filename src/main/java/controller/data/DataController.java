@@ -22,6 +22,8 @@ public interface DataController {
 
     void saveDataInCache(List<Sortable> listData);
 
+    void saveCacheInLocalFile();
+
     void clearCache();
 
     boolean cacheIsClear();

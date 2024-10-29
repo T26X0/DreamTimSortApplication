@@ -39,9 +39,7 @@ public class UserControllerImpl implements UserController {
             MenuPoints command;
             try {
                 command = userInput.getCommand();
-                // System.out.println("Command: " + command);
             } catch (NotExistCommandException e) {
-                //  System.out.println("Ошибка: " + e.getMessage());
                 continue;
             }
 
@@ -56,6 +54,7 @@ public class UserControllerImpl implements UserController {
             case CREATING_RAND_DATA -> createRandomData();
             case ENTERING_DATA_IN_TERMINAL -> enterDataInTerminal();
             case SORTING_DATA_FROM_CACHE -> sortDataFromCache();
+            case SAVE_IN_FILE -> saveCacheInLocalFile();
             case RESET_CACHE -> resetCache();
             case RESET_FILE_FOR_DATA -> resetFileForData();
             case SHOW_FULL_CACHE -> showFullCache();
@@ -123,6 +122,11 @@ public class UserControllerImpl implements UserController {
             }
         }
         // Ввод данных
+    }
+
+    @Override
+    public void saveCacheInLocalFile() {
+        dataController.saveCacheInLocalFile();
     }
 
     @Override

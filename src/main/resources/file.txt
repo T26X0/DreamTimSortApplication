@@ -1,1 +1,0 @@
-barrel(116,fish,wood); barrel(48,alcohol,metal);barrel(116,fish,wood); barrel(48,alcohol,metal);barrel(116,fish,wood); barrel(48,alcohol,metal);barrel(116,fish,wood); barrel(48,alcohol,metal)

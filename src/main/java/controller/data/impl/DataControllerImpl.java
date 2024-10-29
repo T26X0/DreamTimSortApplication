@@ -120,6 +120,13 @@ public class DataControllerImpl implements DataController {
     }
 
     @Override
+    public void saveCacheInLocalFile() {
+        // TODO: fileName в константы
+        String dataForSave = StringProcessor.formatAsString(getDataFromCache());
+        dataService.saveDataToLocalFile(dataForSave, "all_sorted_data");
+    }
+
+    @Override
     public void clearCache() {
 
         cache = null;

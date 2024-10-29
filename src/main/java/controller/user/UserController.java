@@ -28,6 +28,7 @@ public interface UserController {
     void readDataFromFile();
     void createRandomData();
     void enterDataInTerminal();
+    void saveCacheInLocalFile();
     void resetCache();
     void sortDataFromCache();
     void resetFileForData();
