@@ -18,6 +18,9 @@ import java.util.List;
 
 public class UserControllerImpl implements UserController {
 
+    private final int widthDisplay = 80;
+    private final int heightDisplay = 30;
+
     private final DataController dataController;
     private final UserInput userInput;
     private final TerminalUserDisplay userDisplay;
@@ -25,7 +28,7 @@ public class UserControllerImpl implements UserController {
     public UserControllerImpl() throws TextBlockFilledException {
         this.dataController = new DataControllerImpl();
         this.userInput = new UserInputImpl();
-        this.userDisplay = new TerminalUserDisplay(80, 30, "DreamTimSortApplication", true);
+        this.userDisplay = new TerminalUserDisplay(widthDisplay, heightDisplay, "DreamTimSortApplication", true);
         initializeMenuDisplay();
     }
 
@@ -36,9 +39,9 @@ public class UserControllerImpl implements UserController {
             MenuPoints command;
             try {
                 command = userInput.getCommand();
-                System.out.println("Command: " + command);
+               // System.out.println("Command: " + command);
             } catch (NotExistCommandException e) {
-                System.out.println("Ошибка: " + e.getMessage());
+              //  System.out.println("Ошибка: " + e.getMessage());
                 continue;
             }
 
@@ -52,12 +55,15 @@ public class UserControllerImpl implements UserController {
             case READING_DATA_FROM_FILE -> readDataFromFile();
             case CREATING_RAND_DATA -> createRandomData();
             case ENTERING_DATA_IN_TERMINAL -> enterDataInTerminal();
-            case RESET_CACHE -> resetCache();
             case SORTING_DATA_FROM_CACHE -> sortDataFromCache();
+            case RESET_CACHE -> resetCache();
             case RESET_FILE_FOR_DATA -> resetFileForData();
+            case SHOW_FULL_CACHE -> showFullCache();
+            case SHOW_ALL_LISTS_WITH_SORTED_DATA_BY_ENTITY -> showAllListsWithSortedDataByEntity();
             case EXIT -> closeApp();
         }
     }
+
 
 
     /**
@@ -79,14 +85,13 @@ public class UserControllerImpl implements UserController {
             for (Sortable item : unSortedData) {
                 displayData.append(item.toString());
             }
-            userDisplay.addRequiredField("Вывод данных с файла", TextBlocks.CONTENT, 2, CenterMod.MID);
-            userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(displayData.toString(), 80), TextBlocks.CONTENT, 3, CenterMod.MID);
+            userDisplay.addRequiredField("Прочитанные с файла данные  " + userDisplay.formatLongStringByDisplayWidth(displayData.toString(), widthDisplay), TextBlocks.MENU_POINT, CenterMod.LEFT);
 
         } catch (Exception e) {
             try {
-                userDisplay.addRequiredField(e.getMessage(), TextBlocks.CONTENT, 3, CenterMod.MID);
+                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
             } catch (TextBlockFilledException ex) {
-                throw new RuntimeException(ex); // Запилить норм обработку
+                throw new RuntimeException(ex);
             }
         }
 
@@ -97,9 +102,13 @@ public class UserControllerImpl implements UserController {
     @Override
     public void createRandomData() {
         try {
-            System.out.println(dataController.generateData(5));
+            userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth("Сгенерированные данные: " + dataController.generateData(5).toString(), widthDisplay), TextBlocks.MENU_POINT, CenterMod.LEFT);
         } catch (Exception e) {
-            throw new RuntimeException(e); // Запилить норм обработку
+            try {
+                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
+            } catch (TextBlockFilledException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -110,35 +119,84 @@ public class UserControllerImpl implements UserController {
             List<Sortable> entitiesFromTerminal = dataController.convertStringToSortableList(dataFromUserInput);
             dataController.saveDataInCache(entitiesFromTerminal);
         } catch (Exception e) {
-            throw new RuntimeException(e); // Запилить норм обработку
+            try {
+                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
+            } catch (TextBlockFilledException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         // Ввод данных
     }
 
     @Override
     public void resetCache() {
-        dataController.clearCache();
+        try {
+            dataController.clearCache();
+        } catch (Exception e) {
+            try {
+                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
+            } catch (TextBlockFilledException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
         // Сброс кэша
     }
 
     @Override
     public void sortDataFromCache() {
-        dataController.sortData();
+        try {
+            dataController.sortData();
+        } catch (Exception e) {
+            try {
+                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
+            } catch (TextBlockFilledException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
         // Сортировка данных в кэше
     }
 
     @Override
     public void resetFileForData() {
-        dataController.clearDataFromLocalDirectory();
-        // Сброс рабочей директории
+        try {
+            dataController.clearDataFromLocalDirectory();
+        } catch (Exception e) {
+            try {
+                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
+            } catch (TextBlockFilledException ex) {
+                throw new RuntimeException(ex);
+            }
+            // Сброс рабочей директории
+        }
+    }
+
+    @Override
+    public void showAllListsWithSortedDataByEntity() {
+
+    }
+
+    @Override
+    public void showFullCache() {
+        try {
+            userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(dataController.getDataFromCache().toString(), widthDisplay), TextBlocks.MENU_POINT, CenterMod.LEFT);
+        } catch (Exception e) {
+            try {
+                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
+            } catch (TextBlockFilledException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
     }
 
 
     private void initializeMenuDisplay() throws TextBlockFilledException {
         String startLine = "                  ";
         for (MenuPoints point : MenuPoints.values()) {
-            userDisplay.addRequiredField(startLine + point.getPointName(), TextBlocks.MENU_POINT, CenterMod.LEFT);
+            userDisplay.addRequiredField(startLine + point.getPointName(), TextBlocks.TITLE, CenterMod.LEFT);
         }
+        userDisplay.addRequiredField("-----------------------------------------------------------------------------", TextBlocks.MENU_POINT, CenterMod.LEFT);
         userDisplay.addRequiredField("-----------------------------------------------------------------------------", TextBlocks.CONTENT, CenterMod.LEFT);
     }
 }
