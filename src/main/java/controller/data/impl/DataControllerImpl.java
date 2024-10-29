@@ -77,9 +77,9 @@ public class DataControllerImpl implements DataController {
     @Override
     public List<Sortable> sortData() {
 
-        TimSort.timSort(cache, GeneralComparatorUtil.getComparatorForSortableEntity());
+        TimSort.timSort(getDataFromCache(), GeneralComparatorUtil.getComparatorForSortableEntity());
 
-        return cache;
+        return getDataFromCache();
     }
 
     @Override

@@ -39,9 +39,9 @@ public class UserControllerImpl implements UserController {
             MenuPoints command;
             try {
                 command = userInput.getCommand();
-               // System.out.println("Command: " + command);
+                // System.out.println("Command: " + command);
             } catch (NotExistCommandException e) {
-              //  System.out.println("Ошибка: " + e.getMessage());
+                //  System.out.println("Ошибка: " + e.getMessage());
                 continue;
             }
 
@@ -64,12 +64,6 @@ public class UserControllerImpl implements UserController {
         }
     }
 
-
-
-    /**
-     * Запилить норм визуал
-     */
-
     @Override
     public void closeApp() {
         // Завершение программы
@@ -85,6 +79,7 @@ public class UserControllerImpl implements UserController {
             for (Sortable item : unSortedData) {
                 displayData.append(item.toString());
             }
+            dataController.saveDataInCache(unSortedData);
             userDisplay.addRequiredField("Прочитанные с файла данные  " + userDisplay.formatLongStringByDisplayWidth(displayData.toString(), widthDisplay), TextBlocks.MENU_POINT, CenterMod.LEFT);
 
         } catch (Exception e) {
@@ -94,9 +89,6 @@ public class UserControllerImpl implements UserController {
                 throw new RuntimeException(ex);
             }
         }
-
-        // Чтение данных из файла
-
     }
 
     @Override
@@ -144,17 +136,15 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public void sortDataFromCache() {
-        try {
+//        try {
             dataController.sortData();
-        } catch (Exception e) {
-            try {
-                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
-            } catch (TextBlockFilledException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-
-        // Сортировка данных в кэше
+//        } catch (Exception e) {
+//            try {
+//                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
+//            } catch (TextBlockFilledException ex) {
+//                throw new RuntimeException(e);
+//            }
+//        }
     }
 
     @Override

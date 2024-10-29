@@ -39,7 +39,11 @@ public class TimSort {
             T temp = array.get(i);
             int j = i - 1;
             while (j >= left && unsortedSubList.compare(array.get(j), temp) > 0) {
-                array.set(j + 1, array.get(j));
+                System.out.println("array: " + array);
+                System.out.println("j: " + j);
+                System.out.println("array.get(j): " + array.get(j));
+                T tempEntity = array.get(j);
+                array.set(j + 1, tempEntity);
                 j--;
             }
             array.set(j + 1, temp);
