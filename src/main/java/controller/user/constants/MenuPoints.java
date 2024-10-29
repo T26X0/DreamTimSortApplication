@@ -14,21 +14,21 @@ public enum MenuPoints {
     ENTERING_DATA_IN_TERMINAL("3", "3. Ввести данные из терминала"),
 
     SORTING_DATA_FROM_CACHE("4", "4. Сортировать сохраненные в кэше данные"),
-    SORT_BY_EVEN_INT("18", "18. Отсортировать только четные значения"),
+    SORT_BY_EVEN_INT("5", "5. Отсортировать только четные значения"),
 
-    SAVE_IN_FILE("5", "5. Сохранить данные в общий файл"),
-    SAVE_IN_FILE_BY_ENTITIES("15", "15. Сохранить данные разные файлы"),
+    SAVE_IN_FILE("6", "6. Сохранить данные в общий файл"),
+    SAVE_IN_FILE_BY_ENTITIES("7", "7. Сохранить данные разные файлы"),
 
-    FIND_BY_ENTITY("16", "16. Найти по шаблону сущности"),
-    FIND_BY_FIELD("17", "17. Найти все сущности по полю"),
+    FIND_BY_ENTITY("8", "8. Найти по шаблону сущности"),
+    FIND_BY_FIELD("9", "9. Найти все сущности по полю"),
 
-    RESET_CACHE("6", "6. Сбросить кэш"),
-    RESET_FILE_FOR_DATA("7", "7. Сбросить рабочую директорию"),
+    RESET_CACHE("10", "10. Сбросить кэш"),
+    RESET_FILE_FOR_DATA("11", "11. Сбросить рабочую директорию"),
 
-    SHOW_FULL_CACHE("8", "8. Отобразить весь кэш"),
-    SHOW_ALL_LISTS_WITH_SORTED_DATA_BY_ENTITY("9", "9. Отобразить списки с сущностями"),
+    SHOW_FULL_CACHE("12", "12. Отобразить весь кэш"),
+    SHOW_ALL_LISTS_WITH_SORTED_DATA_BY_ENTITY("13", "13. Отобразить списки с сущностями"),
 
-    EXIT("10", "10. Выйти из программы");
+    EXIT("14", "14. Выйти из программы");
 
     private final String pointId;
 
