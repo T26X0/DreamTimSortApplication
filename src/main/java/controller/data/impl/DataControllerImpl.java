@@ -52,6 +52,7 @@ public class DataControllerImpl implements DataController {
 
         String data = dataService.getData();
         if (data.isEmpty()) throw new PatternMismatchException("Исходный файл пуст.");
+        saveDataInCache(convertStringToSortableList(data));
         return convertStringToSortableList(data);
     }
 
