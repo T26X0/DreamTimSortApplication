@@ -1,5 +1,6 @@
 package controller.data.sort;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -10,12 +11,13 @@ public class TimSort {
     /**
      * Основной метод сортировки
      */
-    public static <T> void timSort(List<T> unsortedList, Comparator<? super T> comparator) {
-        int unsortedListSize = unsortedList.size();
+    public static <T> void timSort(List<T> immutableList, Comparator<? super T> comparator) {
+        List<T> mutableList = new ArrayList<>(immutableList);
+        int unsortedListSize = mutableList.size();
 
         // Сортируем подмассивы (run) с помощью Insertion Sort
         for (int i = 0; i < unsortedListSize; i += RUN) {
-            insertionSort(unsortedList, i, Math.min((i + RUN - 1), (unsortedListSize - 1)), comparator);
+            insertionSort(mutableList, i, Math.min((i + RUN - 1), (unsortedListSize - 1)), comparator);
         }
 
         // Объединяем отсортированные подмассивы
@@ -25,7 +27,7 @@ public class TimSort {
                 int right = Math.min((left + 2 * size - 1), (unsortedListSize - 1));
 
                 if (mid < right) {
-                    merge(unsortedList, left, mid, right, comparator);
+                    merge(mutableList, left, mid, right, comparator);
                 }
             }
         }

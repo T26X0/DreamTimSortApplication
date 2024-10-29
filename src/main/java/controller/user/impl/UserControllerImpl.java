@@ -136,15 +136,15 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public void sortDataFromCache() {
-//        try {
+        try {
             dataController.sortData();
-//        } catch (Exception e) {
-//            try {
-//                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
-//            } catch (TextBlockFilledException ex) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+        } catch (Exception e) {
+            try {
+                userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
+            } catch (TextBlockFilledException ex) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
