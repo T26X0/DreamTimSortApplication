@@ -34,8 +34,8 @@ public class DynamicClassCreation {
         String[] parts = extractInnerData(data);
 
         int age = Integer.parseInt(parts[1].trim());
-        String gender = parts[2].trim();
-        String surname = parts[0].trim();
+        String gender = parts[0].trim();
+        String surname = parts[2].trim();
 
         return new Human.Builder()
                 .age(age)
@@ -50,7 +50,7 @@ public class DynamicClassCreation {
 
         String species = parts[0].trim();
         String eyeColor = parts[1].trim();
-        boolean hair = Boolean.parseBoolean(parts[2].trim());
+        boolean hair = "yes".equalsIgnoreCase(parts[2].trim());
 
         return new Animal.Builder()
                 .species(species)
