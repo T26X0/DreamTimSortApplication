@@ -2,6 +2,8 @@ package controller.user.impl;
 
 import controller.data.DataController;
 import controller.data.impl.DataControllerImpl;
+import controller.data.impl.DynamicClassCreation;
+import controller.data.impl.StringProcessor;
 import controller.input.UserInput;
 import controller.input.exception.NotExistCommandException;
 import controller.input.impl.UserInputImpl;
@@ -56,8 +58,8 @@ public class UserControllerImpl implements UserController {
             case SORTING_DATA_FROM_CACHE -> sortDataFromCache();
             case SAVE_IN_FILE -> saveCacheInLocalFile();
             case SAVE_IN_FILE_BY_ENTITIES -> saveAllListsWithSortedDataByEntity();
-//            case FIND_BY_ENTITY -> ;
-//            case FIND_BY_FIELD -> ;
+            case FIND_BY_ENTITY -> findElementIdByEntity();
+            case FIND_BY_FIELD -> findByField();
             case RESET_CACHE -> resetCache();
             case RESET_FILE_FOR_DATA -> resetFileForData();
             case SHOW_FULL_CACHE -> showFullCache();
@@ -157,6 +159,25 @@ public class UserControllerImpl implements UserController {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @Override
+    public void findElementIdByEntity() {
+        String dataFromUserInput = userInput.getDataFromUserInput();
+        String[] process = StringProcessor.process(dataFromUserInput);
+        DynamicClassCreation dynamicClassCreation = new DynamicClassCreation();
+        Sortable sortable = dynamicClassCreation.creatureClass(process).get(0);
+        int byEntity = dataController.findByEntity(sortable);
+
+        if (byEntity == -1) System.out.println("В кэше нет искомой сущности нет");
+        else System.out.println("Id искомой сущности: " + byEntity);
+    }
+
+    @Override
+    public void findByField() {
+        String field = userInput.getDataFromUserInput();
+        List<Sortable> allWithField = dataController.findAllWithField(field);
+        System.out.println(allWithField);
     }
 
     @Override

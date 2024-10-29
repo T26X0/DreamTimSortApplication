@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface SearchByEntity<T> {
 
-        List<T> findByField(List<T> allData, String field) throws EmptyCacheException;
+        List<T> findByField(List<T> allData, String field);
 }

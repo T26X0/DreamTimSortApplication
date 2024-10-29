@@ -17,13 +17,10 @@ public interface UserController {
      * Запускает отслеживание действий пользователя
      */
     void startTrackingUserAction() throws NotExistCommandException;
-
     void executeCommand(MenuPoints command);
-
     static void addException(Exception exception) {
         exceptionsLog.add(exception);
     }
-
     void closeApp();
     void readDataFromFile();
     void createRandomData();
@@ -31,6 +28,8 @@ public interface UserController {
     void saveCacheInLocalFile();
     void resetCache();
     void sortDataFromCache();
+    void findElementIdByEntity();
+    void findByField();
     void resetFileForData();
     void showAllListsWithSortedDataByEntity();
     void saveAllListsWithSortedDataByEntity();

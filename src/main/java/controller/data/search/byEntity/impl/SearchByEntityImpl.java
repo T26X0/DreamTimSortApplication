@@ -21,17 +21,15 @@ public class SearchByEntityImpl implements SearchByEntity<Sortable> {
     private final SearchBarrel searchBarrel;
     private final SearchAnimal searchAnimal;
     private final SearchHuman searchHuman;
-    private final DataController dataController;
 
     public SearchByEntityImpl() {
         this.searchBarrel = new SearchBarrelImpl();
         this.searchAnimal = new SearchAnimalImpl();
         this.searchHuman = new SearchHumanImpl();
-        this.dataController = new DataControllerImpl();
     }
 
     @Override
-    public List<Sortable> findByField(List<Sortable> allData, String field) throws EmptyCacheException {
+    public List<Sortable> findByField(List<Sortable> allData, String field) {
         return allData.stream()
                 .filter(it -> it.getAllFieldToStringList().contains(field))
                 .toList();

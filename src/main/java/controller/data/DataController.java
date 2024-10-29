@@ -20,6 +20,9 @@ public interface DataController {
 
     List<Sortable> sortData();
 
+    int findByEntity(Sortable sortable);
+    List<Sortable> findAllWithField(String field);
+
     void saveDataInCache(List<Sortable> listData);
 
     void saveCacheInLocalFile();

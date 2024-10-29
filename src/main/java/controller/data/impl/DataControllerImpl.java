@@ -4,6 +4,10 @@ import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
 import controller.data.generation.impl.DataGenerationImpl;
+import controller.data.search.binary.BinarySearch;
+import controller.data.search.binary.impl.BinarySearchImpl;
+import controller.data.search.byEntity.SearchByEntity;
+import controller.data.search.byEntity.impl.SearchByEntityImpl;
 import controller.data.sort.TimSort;
 import controller.data.sort.impl.TimSortImpl;
 
@@ -43,10 +47,16 @@ public class DataControllerImpl implements DataController {
 
     private final TimSort<Sortable> timSort;
 
+    private final BinarySearch<Sortable> binarySearch;
+
+    private final SearchByEntity<Sortable> searchByEntity;
+
     public DataControllerImpl() {
 
         this.dataService = new DataServiceImpl();
         this.timSort = new TimSortImpl<>();
+        this.binarySearch = new BinarySearchImpl<>();
+        this.searchByEntity = new SearchByEntityImpl();
     }
 
     @Override
@@ -111,6 +121,16 @@ public class DataControllerImpl implements DataController {
         separateCacheToUniqueLists();
 
         return cache;
+    }
+
+    @Override
+    public int findByEntity(Sortable sortable) {
+        return binarySearch.binarySearchByEntity(getDataFromCache(), sortable, GeneralComparatorUtil.getComparatorForSortableEntity());
+    }
+
+    @Override
+    public List<Sortable> findAllWithField(String field) {
+        return searchByEntity.findByField(getDataFromCache(), field);
     }
 
     @Override
