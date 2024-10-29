@@ -45,24 +45,4 @@ public class BinarySearchImpl<T>
 
         return -1; // Не найдено
     }
-
-//    @Override
-    public Sortable findEntity(EntityPatternsRegex entityPattern) throws EmptyCacheException {
-        Sortable result = null;
-        if (dataController.cacheIsClear()) throw new EmptyCacheException("Кэш приложения пуст.");
-        switch (entityPattern) {
-            case BARREL_PATTERN -> {
-            }
-            case ANIMAL_PATTERN -> {
-            }
-            case HUMAN_PATTERN -> {
-            }
-        }
-        return result;
-    }
-
-    public List<Sortable> findByField(String field) {
-
-        return null;
-    }
 }
