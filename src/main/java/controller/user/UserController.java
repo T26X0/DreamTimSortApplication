@@ -17,18 +17,22 @@ public interface UserController {
      * Запускает отслеживание действий пользователя
      */
     void startTrackingUserAction() throws NotExistCommandException;
-
     void executeCommand(MenuPoints command);
-
     static void addException(Exception exception) {
         exceptionsLog.add(exception);
     }
-
     void closeApp();
     void readDataFromFile();
     void createRandomData();
     void enterDataInTerminal();
+    void saveCacheInLocalFile();
     void resetCache();
     void sortDataFromCache();
+    void sortDataOnlyByEvenInt();
+    void findElementIdByEntity();
+    void findByField();
     void resetFileForData();
+    void showAllListsWithSortedDataByEntity();
+    void saveAllListsWithSortedDataByEntity();
+    void showFullCache();
 }

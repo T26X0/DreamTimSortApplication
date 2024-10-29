@@ -63,6 +63,7 @@ public class TerminalUserDisplay extends DisplayController {
     }
 
     public String formatLongStringByDisplayWidth(String str, int width) {
+        System.out.println(str);
         if (str.length() < width - 4) {
             return str;
         }

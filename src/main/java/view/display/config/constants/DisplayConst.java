@@ -41,10 +41,10 @@ public class DisplayConst {
     protected static int headlineLocationY = 2;
 
     protected static Map<Integer, Boolean> titleTextBlockCondition = new HashMap<>();
-    protected static int[] positionTitleTextBlockHeight = new int[7];
+    protected static int[] positionTitleTextBlockHeight = new int[14];
 
     protected static Map<Integer, Boolean> menuPointTextBlockCondition = new HashMap<>();
-    protected static int[] menuPointTextBlockHeight = new int[9];
+    protected static int[] menuPointTextBlockHeight = new int[6];
 
     protected static Map<Integer, Boolean> contentTextBlockCondition = new HashMap<>();
     protected static int[] positionContentTextBlockHeight = new int[sizeDisplayY];
@@ -90,25 +90,29 @@ public class DisplayConst {
         positionTitleTextBlockHeight[4] = positionTitleTextBlockHeight[3] + 1;
         positionTitleTextBlockHeight[5] = positionTitleTextBlockHeight[4] + 1;
         positionTitleTextBlockHeight[6] = positionTitleTextBlockHeight[5] + 1;
+        positionTitleTextBlockHeight[7] = positionTitleTextBlockHeight[6] + 1;
+        positionTitleTextBlockHeight[8] = positionTitleTextBlockHeight[7] + 1;
+        positionTitleTextBlockHeight[9] = positionTitleTextBlockHeight[8] + 1;
+        positionTitleTextBlockHeight[10] = positionTitleTextBlockHeight[9] + 1;
+        positionTitleTextBlockHeight[11] = positionTitleTextBlockHeight[10] + 1;
+        positionTitleTextBlockHeight[12] = positionTitleTextBlockHeight[11] + 1;
+        positionTitleTextBlockHeight[13] = positionTitleTextBlockHeight[12] + 1;
 
-        menuPointTextBlockHeight[0] = positionTitleTextBlockHeight[6] + 2;
+        menuPointTextBlockHeight[0] = positionTitleTextBlockHeight[12] + 2;
         menuPointTextBlockHeight[1] = menuPointTextBlockHeight[0] + 1;
         menuPointTextBlockHeight[2] = menuPointTextBlockHeight[1] + 1;
         menuPointTextBlockHeight[3] = menuPointTextBlockHeight[2] + 1;
         menuPointTextBlockHeight[4] = menuPointTextBlockHeight[3] + 1;
         menuPointTextBlockHeight[5] = menuPointTextBlockHeight[4] + 1;
-        menuPointTextBlockHeight[6] = menuPointTextBlockHeight[5] + 1;
-        menuPointTextBlockHeight[7] = menuPointTextBlockHeight[6] + 1;
-        menuPointTextBlockHeight[8] = menuPointTextBlockHeight[7] + 1;
 
-        contentTextBlockSize = (sizeDisplayY - 2) - (menuPointTextBlockHeight[8] + 1);
+        contentTextBlockSize = (sizeDisplayY - 2) - (menuPointTextBlockHeight[5] + 1);
         positionContentTextBlockHeight = new int[contentTextBlockSize];
         initContentTextBlock();
         resetTextBlockBusy();
     }
 
     private static void initContentTextBlock() {
-        int startLineIndexForContentBlock = menuPointTextBlockHeight[8] + 2;
+        int startLineIndexForContentBlock = menuPointTextBlockHeight[5] + 2;
 
         positionContentTextBlockHeight = new int[contentTextBlockSize];
 

@@ -52,12 +52,9 @@ public final class DataGenerationImpl implements DataGeneration {
 
         for(int i = 0; i < len; i++){
             switch (selectRandomClass.nextInt(3)){
-                case (0):
-                    listRandomClass.add(getRandomAnimal());
-                case (1):
-                    listRandomClass.add(getRandomBarrel());
-                case (2):
-                    listRandomClass.add(getRandomHuman());
+                case (0) -> listRandomClass.add(getRandomAnimal());
+                case (1) -> listRandomClass.add(getRandomBarrel());
+                case (2) -> listRandomClass.add(getRandomHuman());
             }
         }
         return listRandomClass;

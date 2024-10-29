@@ -17,8 +17,8 @@ public class StringProcessor {
         return resultArray;
     }
 
-    public static String formatDirtyData(List<Sortable> dirtyData) {
-        return dirtyData.stream()
+    public static String formatAsString(List<Sortable> list) {
+        return list.stream()
                 .map(Sortable::toString)
                 .collect(Collectors.joining(" "))
                 .replaceAll(";$", "");

@@ -4,11 +4,16 @@ import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
 import controller.data.generation.impl.DataGenerationImpl;
-import controller.data.search.binary.exception.EmptyCacheException;
+import controller.data.search.binary.BinarySearch;
+import controller.data.search.binary.impl.BinarySearchImpl;
+import controller.data.search.byEntity.SearchByEntity;
+import controller.data.search.byEntity.impl.SearchByEntityImpl;
 import controller.data.sort.TimSort;
+import controller.data.sort.impl.TimSortImpl;
 
-import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.Setter;
+import model.constants.Entities;
 import model.entity.Animal;
 import model.entity.Barrel;
 import model.entity.Human;
@@ -29,6 +34,7 @@ import java.util.function.Supplier;
 
 public class DataControllerImpl implements DataController {
 
+    @Setter
     private List<Sortable> cache = null;
     @Getter
     private List<Animal> savedAnimals = new ArrayList<>();
@@ -39,9 +45,42 @@ public class DataControllerImpl implements DataController {
 
     private final DataService dataService;
 
+    private final TimSort<Sortable> timSort;
+
+    private final BinarySearch<Sortable> binarySearch;
+
+    private final SearchByEntity<Sortable> searchByEntity;
+
     public DataControllerImpl() {
 
         this.dataService = new DataServiceImpl();
+        this.timSort = new TimSortImpl<>();
+        this.binarySearch = new BinarySearchImpl<>();
+        this.searchByEntity = new SearchByEntityImpl();
+    }
+
+    @Override
+    public <T extends Sortable> List<T> getListEntities(Entities entities) {
+        switch (entities) {
+            case ANIMAL -> {
+                return getDataFromCache().stream()
+                        .filter(it -> it instanceof Animal)
+                        .map(it -> (T) it).toList();
+            }
+            case BARREL -> {
+                return getDataFromCache().stream()
+                        .filter(it -> it instanceof Barrel)
+                        .map(it -> (T) it).toList();
+            }
+            case HUMAN -> {
+                return getDataFromCache().stream()
+                        .filter(it -> it instanceof Human)
+                        .map(it -> (T) it).toList();
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 
     /**
@@ -52,6 +91,7 @@ public class DataControllerImpl implements DataController {
 
         String data = dataService.getData();
         if (data.isEmpty()) throw new PatternMismatchException("Исходный файл пуст.");
+        saveDataInCache(convertStringToSortableList(data));
         return convertStringToSortableList(data);
     }
 
@@ -63,8 +103,8 @@ public class DataControllerImpl implements DataController {
 
         DataGeneration generatedData = new DataGenerationImpl();
 
-        cache = generatedData.getRandomClassList(limit);
-        return List.copyOf(cache);
+        saveDataInCache(generatedData.getRandomClassList(limit));
+        return getDataFromCache();
     }
 
     @Override
@@ -76,9 +116,50 @@ public class DataControllerImpl implements DataController {
     @Override
     public List<Sortable> sortData() {
 
-        TimSort.timSort(cache, GeneralComparatorUtil.getComparatorForSortableEntity());
+        List<Sortable> sortables = timSort.sort(cache, GeneralComparatorUtil.getComparatorForSortableEntity());
+        setCache(sortables);
+        separateCacheToUniqueLists();
 
         return cache;
+    }
+
+    @Override
+    public List<Sortable> sortOnlyEvenElement() {
+        List<Sortable> dataForSort = new ArrayList<>(getDataFromCache());
+        List<Integer> listPosition = new ArrayList<>();
+        List<Sortable> listEven = new ArrayList<>();
+        for(int i = 0; i < dataForSort.size(); i++){
+            Sortable item = dataForSort.get(i);
+            if (item instanceof Human) {
+                if (((Human) item).getAge() % 2 == 0) {
+                    listPosition.add(i);
+                    listEven.add(item);
+                }
+            }
+            if (item instanceof Barrel) {
+                if (((Barrel) item).getValue() % 2 == 0) {
+                    listPosition.add(i);
+                    listEven.add(item);
+                }
+            }
+        }
+        timSort.sort(listEven, GeneralComparatorUtil.getComparatorForSortableEntity());
+        for(int i = 0; i < listPosition.size(); i++){
+            dataForSort.set(listPosition.get(i), listEven.get(i));
+        }
+        saveDataInCache(dataForSort);
+        separateCacheToUniqueLists();
+        return dataForSort;
+    }
+
+    @Override
+    public int findByEntity(Sortable sortable) {
+        return binarySearch.binarySearchByEntity(getDataFromCache(), sortable, GeneralComparatorUtil.getComparatorForSortableEntity());
+    }
+
+    @Override
+    public List<Sortable> findAllWithField(String field) {
+        return searchByEntity.findByField(getDataFromCache(), field);
     }
 
     @Override
@@ -88,15 +169,42 @@ public class DataControllerImpl implements DataController {
     }
 
     @Override
+    public void saveCacheInLocalFile() {
+        // TODO: fileName в константы
+        String dataForSave = StringProcessor.formatAsString(getDataFromCache());
+        dataService.saveDataToLocalFile(dataForSave, "all_sorted_data");
+    }
+
+    @Override
+    public void saveCacheInLocalFileByEntities() {
+        List<Sortable> savedAnimals = formatToSortable(getSavedAnimals());
+        String animalsForSave = StringProcessor.formatAsString(savedAnimals);
+
+        List<Sortable> savedBarrels = formatToSortable(getSavedBarrels());
+        String barrelsForSave = StringProcessor.formatAsString(savedBarrels);
+
+        List<Sortable> savedHumans = formatToSortable(getSavedHumans());
+        String humansForSave = StringProcessor.formatAsString(savedHumans);
+
+        dataService.saveDataToLocalFile(animalsForSave, "saved_animals");
+        dataService.saveDataToLocalFile(barrelsForSave, "saved_barrels");
+        dataService.saveDataToLocalFile(humansForSave, "saved_humans");
+    }
+
+    private <T> List<Sortable> formatToSortable(List<T> list) {
+        return list.stream().map(it -> (Sortable) it).toList();
+    }
+
+    @Override
     public void clearCache() {
 
         cache = null;
     }
 
     @Override
-    public boolean cacheIsClear() {
+    public boolean cacheIsNotClear() {
 
-        if (Objects.isNull(cache)) {
+        if (Objects.nonNull(cache)) {
             return true;
         }
 
@@ -125,29 +233,7 @@ public class DataControllerImpl implements DataController {
         return dynamicallyCreatedClasses.creatureClass(processedData);
     }
 
-    public void saveDataToLocalFile() throws EmptyCacheException {
-
-        separateCacheToUniqueLists();
-
-        String animalString = getSavedAnimals().stream()
-            .map(Animal::toString)
-            .collect(Collectors.joining(""));
-        dataService.saveDataToLocalFile(animalString, "sortedAnimals");
-
-        String barrelString = getSavedBarrels().stream()
-            .map(Barrel::toString)
-            .collect(Collectors.joining(""));
-        dataService.saveDataToLocalFile(barrelString, "sortedBarrels");
-
-        String humanString = getSavedHumans().stream()
-            .map(Human::toString)
-            .collect(Collectors.joining(""));
-        dataService.saveDataToLocalFile(humanString, "sortedHumans");
-    }
-
-    private void separateCacheToUniqueLists() throws EmptyCacheException {
-        if(cache == null)
-            throw new EmptyCacheException("В кэше нет данных для разделения.");
+    private void separateCacheToUniqueLists() {
 
         savedHumans.clear();
         savedBarrels.clear();
