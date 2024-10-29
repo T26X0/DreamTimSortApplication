@@ -11,6 +11,7 @@ import controller.data.sort.impl.TimSortImpl;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
+import model.constants.Entities;
 import model.entity.Animal;
 import model.entity.Barrel;
 import model.entity.Human;
@@ -48,6 +49,30 @@ public class DataControllerImpl implements DataController {
 
         this.dataService = new DataServiceImpl();
         this.timSort = new TimSortImpl<>();
+    }
+
+    @Override
+    public <T extends Sortable> List<T> getListEntities(Entities entities) {
+        switch (entities) {
+            case ANIMAL -> {
+                return getDataFromCache().stream()
+                        .filter(it -> it instanceof Animal)
+                        .map(it -> (T) it).toList();
+            }
+            case BARREL -> {
+                return getDataFromCache().stream()
+                        .filter(it -> it instanceof Barrel)
+                        .map(it -> (T) it).toList();
+            }
+            case HUMAN -> {
+                return getDataFromCache().stream()
+                        .filter(it -> it instanceof Human)
+                        .map(it -> (T) it).toList();
+            }
+            default -> {
+                return null;
+            }
+        }
     }
 
     /**
@@ -137,23 +162,23 @@ public class DataControllerImpl implements DataController {
         separateCacheToUniqueLists();
 
         String animalString = getSavedAnimals().stream()
-            .map(Animal::toString)
-            .collect(Collectors.joining(""));
+                .map(Animal::toString)
+                .collect(Collectors.joining(""));
         dataService.saveDataToLocalFile(animalString, "sortedAnimals");
 
         String barrelString = getSavedBarrels().stream()
-            .map(Barrel::toString)
-            .collect(Collectors.joining(""));
+                .map(Barrel::toString)
+                .collect(Collectors.joining(""));
         dataService.saveDataToLocalFile(barrelString, "sortedBarrels");
 
         String humanString = getSavedHumans().stream()
-            .map(Human::toString)
-            .collect(Collectors.joining(""));
+                .map(Human::toString)
+                .collect(Collectors.joining(""));
         dataService.saveDataToLocalFile(humanString, "sortedHumans");
     }
 
     private void separateCacheToUniqueLists() throws EmptyCacheException {
-        if(cache == null)
+        if (cache == null)
             throw new EmptyCacheException("В кэше нет данных для разделения.");
 
         savedHumans.clear();

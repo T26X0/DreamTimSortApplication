@@ -1,5 +1,6 @@
 package controller.data;
 
+import model.constants.Entities;
 import model.entity.sortable.Sortable;
 
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
  * DataController занимается обработкой данных
  */
 public interface DataController {
+
+    <T extends Sortable> List<T> getListEntities(Entities entities);
 
     List<Sortable> readData() throws Exception;
 

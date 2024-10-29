@@ -7,13 +7,13 @@ import controller.input.exception.NotExistCommandException;
 import controller.input.impl.UserInputImpl;
 import controller.user.UserController;
 import controller.user.constants.MenuPoints;
+import model.constants.Entities;
 import model.entity.sortable.Sortable;
 import view.display.TerminalUserDisplay;
 import view.display.config.constants.CenterMod;
 import view.display.config.constants.TextBlocks;
 import view.display.exception.TextBlockFilledException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserControllerImpl implements UserController {
@@ -168,7 +168,9 @@ public class UserControllerImpl implements UserController {
 
     @Override
     public void showAllListsWithSortedDataByEntity() {
-
+        System.out.println(dataController.getListEntities(Entities.ANIMAL));
+        System.out.println(dataController.getListEntities(Entities.BARREL));
+        System.out.println(dataController.getListEntities(Entities.HUMAN));
     }
 
     @Override
