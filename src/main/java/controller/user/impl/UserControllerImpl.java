@@ -30,7 +30,7 @@ public class UserControllerImpl implements UserController {
     public UserControllerImpl() throws TextBlockFilledException {
         this.dataController = new DataControllerImpl();
         this.userInput = new UserInputImpl();
-        this.userDisplay = new TerminalUserDisplay(widthDisplay, heightDisplay, "DreamTimSortApplication", true);
+        this.userDisplay = new TerminalUserDisplay(widthDisplay, heightDisplay, "DreamTimSortApplication", false);
         initializeMenuDisplay();
     }
 
