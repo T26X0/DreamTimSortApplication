@@ -20,6 +20,8 @@ public interface DataController {
 
     List<Sortable> sortData();
 
+    List<Sortable> sortOnlyEvenElement();
+
     int findByEntity(Sortable sortable);
     List<Sortable> findAllWithField(String field);
 

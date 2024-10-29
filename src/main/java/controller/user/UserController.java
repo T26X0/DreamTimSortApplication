@@ -28,6 +28,7 @@ public interface UserController {
     void saveCacheInLocalFile();
     void resetCache();
     void sortDataFromCache();
+    void sortDataOnlyByEvenInt();
     void findElementIdByEntity();
     void findByField();
     void resetFileForData();

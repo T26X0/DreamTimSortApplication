@@ -60,6 +60,7 @@ public class UserControllerImpl implements UserController {
             case SAVE_IN_FILE_BY_ENTITIES -> saveAllListsWithSortedDataByEntity();
             case FIND_BY_ENTITY -> findElementIdByEntity();
             case FIND_BY_FIELD -> findByField();
+            case SORT_BY_EVEN_INT -> sortDataOnlyByEvenInt();
             case RESET_CACHE -> resetCache();
             case RESET_FILE_FOR_DATA -> resetFileForData();
             case SHOW_FULL_CACHE -> showFullCache();
@@ -162,6 +163,12 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
+    public void sortDataOnlyByEvenInt() {
+        List<Sortable> sortables = dataController.sortOnlyEvenElement();
+        System.out.println("Отсортированный список: " + sortables);
+    }
+
+    @Override
     public void findElementIdByEntity() {
         String dataFromUserInput = userInput.getDataFromUserInput();
         String[] process = StringProcessor.process(dataFromUserInput);
@@ -211,9 +218,7 @@ public class UserControllerImpl implements UserController {
         try {
             List<Sortable> dataFromCache = dataController.getDataFromCache();
             String dataFromCacheString = dataFromCache.toString();
-            System.out.println("dataFromCacheString:: " + dataFromCacheString);
             String stringForDisplay = userDisplay.formatLongStringByDisplayWidth(dataFromCacheString, widthDisplay);
-            System.out.println("stringForDisplay:: " + stringForDisplay);
             userDisplay.addRequiredField(stringForDisplay, TextBlocks.MENU_POINT, CenterMod.LEFT);
         } catch (Exception e) {
             try {

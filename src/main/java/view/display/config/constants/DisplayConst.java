@@ -41,7 +41,7 @@ public class DisplayConst {
     protected static int headlineLocationY = 2;
 
     protected static Map<Integer, Boolean> titleTextBlockCondition = new HashMap<>();
-    protected static int[] positionTitleTextBlockHeight = new int[13];
+    protected static int[] positionTitleTextBlockHeight = new int[14];
 
     protected static Map<Integer, Boolean> menuPointTextBlockCondition = new HashMap<>();
     protected static int[] menuPointTextBlockHeight = new int[6];
@@ -96,8 +96,9 @@ public class DisplayConst {
         positionTitleTextBlockHeight[10] = positionTitleTextBlockHeight[9] + 1;
         positionTitleTextBlockHeight[11] = positionTitleTextBlockHeight[10] + 1;
         positionTitleTextBlockHeight[12] = positionTitleTextBlockHeight[11] + 1;
+        positionTitleTextBlockHeight[13] = positionTitleTextBlockHeight[12] + 1;
 
-        menuPointTextBlockHeight[0] = positionTitleTextBlockHeight[11] + 2;
+        menuPointTextBlockHeight[0] = positionTitleTextBlockHeight[12] + 2;
         menuPointTextBlockHeight[1] = menuPointTextBlockHeight[0] + 1;
         menuPointTextBlockHeight[2] = menuPointTextBlockHeight[1] + 1;
         menuPointTextBlockHeight[3] = menuPointTextBlockHeight[2] + 1;

@@ -1,0 +1,1 @@
+animal(dog,black,yes); animal(bird,hazel,no); animal(cardinal,green,yes)

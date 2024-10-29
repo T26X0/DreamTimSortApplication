@@ -103,8 +103,8 @@ public class DataControllerImpl implements DataController {
 
         DataGeneration generatedData = new DataGenerationImpl();
 
-        cache = generatedData.getRandomClassList(limit);
-        return List.copyOf(cache);
+        saveDataInCache(generatedData.getRandomClassList(limit));
+        return getDataFromCache();
     }
 
     @Override
@@ -121,6 +121,35 @@ public class DataControllerImpl implements DataController {
         separateCacheToUniqueLists();
 
         return cache;
+    }
+
+    @Override
+    public List<Sortable> sortOnlyEvenElement() {
+        List<Sortable> dataForSort = new ArrayList<>(getDataFromCache());
+        List<Integer> listPosition = new ArrayList<>();
+        List<Sortable> listEven = new ArrayList<>();
+        for(int i = 0; i < dataForSort.size(); i++){
+            Sortable item = dataForSort.get(i);
+            if (item instanceof Human) {
+                if (((Human) item).getAge() % 2 == 0) {
+                    listPosition.add(i);
+                    listEven.add(item);
+                }
+            }
+            if (item instanceof Barrel) {
+                if (((Barrel) item).getValue() % 2 == 0) {
+                    listPosition.add(i);
+                    listEven.add(item);
+                }
+            }
+        }
+        timSort.sort(listEven, GeneralComparatorUtil.getComparatorForSortableEntity());
+        for(int i = 0; i < listPosition.size(); i++){
+            dataForSort.set(listPosition.get(i), listEven.get(i));
+        }
+        saveDataInCache(dataForSort);
+        separateCacheToUniqueLists();
+        return dataForSort;
     }
 
     @Override
