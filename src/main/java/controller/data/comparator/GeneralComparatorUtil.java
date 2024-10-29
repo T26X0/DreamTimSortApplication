@@ -24,16 +24,19 @@ public final class GeneralComparatorUtil {
                     return new HumanComparator().compare((Human) o1, (Human) o2);
                 }
 
-                if (o1 instanceof Barrel & (o2 instanceof Animal || o2 instanceof Human)) {
+                if (o1 instanceof Animal & (o2 instanceof Barrel || o2 instanceof Human)) {
                     return -1;
                 }
-                if (o1 instanceof Animal & o2 instanceof Barrel) {
+                if (o1 instanceof Barrel & (o2 instanceof Animal)) {
                     return 1;
                 }
-                if (o1 instanceof Animal & o2 instanceof Human) {
+                if (o1 instanceof Barrel & (o2 instanceof Human)) {
                     return -1;
                 }
-                if (o1 instanceof Human & (o2 instanceof Barrel || o2 instanceof Animal)) {
+                if (o1 instanceof Human & (o2 instanceof Barrel)) {
+                    return 1;
+                }
+                if (o1 instanceof Human & (o2 instanceof Animal)) {
                     return 1;
                 }
                 return 1;
