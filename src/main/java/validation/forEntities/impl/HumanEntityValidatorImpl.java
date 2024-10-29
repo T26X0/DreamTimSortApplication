@@ -1,8 +1,11 @@
 package validation.forEntities.impl;
 
-import static model.repository.constants.EntityConstants.*;
-import static model.repository.constants.EntityPatternsRegex.HUMAN_PATTERN;
+import static model.constants.EntityConstants.*;
 
+import static model.constants.EntityPatternsRegex.FIELD_PATTERN;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,27 +28,24 @@ public class HumanEntityValidatorImpl implements HumanEntityValidator {
     private final String genderFemale = GENDER_FEMALE.getValue();
 
     @Override
-    public void validateEntityString(String human)
-            throws ExceedingPermissibleLengthException, IncorrectAgeException, IncorrectDataTypeException, PatternMismatchException, NegativeNumberException {
+    public void validateEntityString(String animal) throws ExceedingPermissibleLengthException, IncorrectDataTypeException, NegativeNumberException {
 
-        Pattern pattern = Pattern.compile(HUMAN_PATTERN.getPattern(), Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(human);
-
-        if (!matcher.matches()) {
-            throw new PatternMismatchException("Строка не соответствует паттерну.");
+        Pattern pattern = Pattern.compile(FIELD_PATTERN.getPattern());
+        Matcher matcher = pattern.matcher(animal);
+        List<String> list = new ArrayList<>();
+        if (matcher.find()) {
+            list = List.of(matcher.group(1).split("\\s*,\\s*"));
         }
-
-        String gender = matcher.group(1);
-        int Age = Integer.parseInt(matcher.group(2));
-        String name = matcher.group(3);
+        String gender = list.get(0);
+        int age = Integer.parseInt(list.get(1));
+        String name = list.get(2);
 
         stringValidator.validateMaxStringLength(name);
-
-        integerValidator.validateMaxPossibleIntValue(Age, maxAge);
+        integerValidator.validateMaxPossibleIntValue(age, maxAge);
 
         if (!gender.equalsIgnoreCase(genderMale) && !gender.equalsIgnoreCase(genderFemale)) {
             throw new IncorrectDataTypeException(String.format(
-                "Гендер можеть быть только '%s' или '%s'.", genderMale, genderFemale));
+                    "Гендер можеть быть только '%s' или '%s'.", genderMale, genderFemale));
         }
     }
 }

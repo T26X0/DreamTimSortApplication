@@ -1,10 +1,8 @@
 package model.service.impl;
 
-import model.repository.DataDAO;
-import model.repository.impl.FileDAOImpl;
+import model.DAO.DataDAO;
+import model.DAO.impl.FileDAOImpl;
 import model.service.DataService;
-
-import java.util.List;
 
 public class DataServiceImpl implements DataService {
 
@@ -22,5 +20,10 @@ public class DataServiceImpl implements DataService {
     @Override
     public void saveDataToLocalFile(String dataForSave, String fileName) {
         dataDAO.saveDataToLocalFile(dataForSave, fileName);
+    }
+
+    @Override
+    public void clearDataFromLocalDirectory() {
+        dataDAO.clearDataFromLocalDirectory();
     }
 }

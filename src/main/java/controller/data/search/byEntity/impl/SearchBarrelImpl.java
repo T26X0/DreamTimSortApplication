@@ -9,6 +9,7 @@ import java.util.List;
 public class SearchBarrelImpl implements SearchBarrel {
 
     @Override
+
     public List<Barrel> findAllByValue(List<Sortable> searchList, int value) {
         return null;
     }
@@ -19,6 +20,7 @@ public class SearchBarrelImpl implements SearchBarrel {
     }
 
     @Override
+
     public List<Barrel> findAllByMaterialOfManufacture(List<Sortable> searchList, String materialOfManufacture) {
         return null;
     }

@@ -3,6 +3,9 @@ package model.entity;
 import lombok.Getter;
 import model.entity.sortable.Sortable;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Human implements Sortable {
 
     @Getter
@@ -24,6 +27,16 @@ public class Human implements Sortable {
     public int compareTo(Sortable o) {
         if (o instanceof Human) return 0;
         return 1;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("human(%s,%d,%s);", gender, age, surname);
+    }
+
+    @Override
+    public List<String> getAllFieldToStringList() {
+        return List.of(String.valueOf(age), gender, surname);
     }
 
     public static class Builder {

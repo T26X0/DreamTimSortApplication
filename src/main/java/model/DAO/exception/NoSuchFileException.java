@@ -1,4 +1,4 @@
-package model.repository.exception;
+package model.DAO.exception;
 
 public class NoSuchFileException extends Exception {
 

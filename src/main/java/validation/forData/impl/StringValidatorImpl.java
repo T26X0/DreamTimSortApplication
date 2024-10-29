@@ -4,18 +4,12 @@ package validation.forData.impl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import model.repository.constants.EntityConstants;
-import validation.forEntities.AnimalEntityValidator;
-import validation.forEntities.BarrelEntityValidator;
-import validation.forEntities.HumanEntityValidator;
+import model.constants.EntityConstants;
 import validation.exception.ExceedingPermissibleLengthException;
 import validation.forData.StringValidator;
 import validation.exception.PatternMismatchException;
-import validation.forEntities.impl.AnimalEntityValidatorImpl;
-import validation.forEntities.impl.BarrelEntityValidatorImpl;
-import validation.forEntities.impl.HumanEntityValidatorImpl;
 
-import static model.repository.constants.EntityPatternsRegex.SOURCE_STRING_PATTERN;
+import static model.constants.EntityPatternsRegex.SOURCE_STRING_PATTERN;
 
 public class StringValidatorImpl implements StringValidator {
 

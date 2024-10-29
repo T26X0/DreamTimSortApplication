@@ -3,6 +3,7 @@ package controller.data.search.byEntity;
 import model.entity.Barrel;
 import model.entity.sortable.Sortable;
 
+
 import java.util.List;
 
 public interface SearchBarrel {

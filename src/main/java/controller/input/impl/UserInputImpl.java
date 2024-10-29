@@ -11,7 +11,7 @@ public class UserInputImpl implements UserInput {
 
     private String getInput() {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     @Override

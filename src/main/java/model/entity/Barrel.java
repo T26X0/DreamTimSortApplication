@@ -3,6 +3,8 @@ package model.entity;
 import lombok.Getter;
 import model.entity.sortable.Sortable;
 
+import java.util.List;
+
 public class Barrel implements Sortable {
 
     @Getter
@@ -24,6 +26,16 @@ public class Barrel implements Sortable {
     public int compareTo(Sortable o) {
         if (o instanceof Barrel) return 0;
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("barrel(%d,%s,%s);", value, storedMaterial, materialOfManufacture);
+    }
+
+    @Override
+    public List<String> getAllFieldToStringList() {
+        return List.of(String.valueOf(value), storedMaterial, materialOfManufacture);
     }
 
     public static class Builder {

@@ -1,5 +1,6 @@
 package controller.data;
 
+import model.constants.Entities;
 import model.entity.sortable.Sortable;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
  */
 public interface DataController {
 
+    <T extends Sortable> List<T> getListEntities(Entities entities);
+
     List<Sortable> readData() throws Exception;
 
     List<Sortable> generateData(int limit) throws Exception;
@@ -17,9 +20,22 @@ public interface DataController {
 
     List<Sortable> sortData();
 
+    List<Sortable> sortOnlyEvenElement();
+
+    int findByEntity(Sortable sortable);
+    List<Sortable> findAllWithField(String field);
+
     void saveDataInCache(List<Sortable> listData);
+
+    void saveCacheInLocalFile();
+
+    void saveCacheInLocalFileByEntities();
 
     void clearCache();
 
-    boolean cacheIsClear();
+    boolean cacheIsNotClear();
+
+    void clearDataFromLocalDirectory();
+
+    List<Sortable> convertStringToSortableList(String string) throws Exception;
 }

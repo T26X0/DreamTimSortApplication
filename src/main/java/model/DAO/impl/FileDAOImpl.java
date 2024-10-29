@@ -1,19 +1,19 @@
-package model.repository.impl;
+package model.DAO.impl;
 
 import controller.user.UserController;
-import model.repository.DataDAO;
+import model.DAO.DataDAO;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 
-import model.repository.exception.NoSuchFileException;
+import model.DAO.exception.NoSuchFileException;
 
 public class FileDAOImpl implements DataDAO {
 
     private final String FILE_PATH = "src/main/resources/file.txt";
+    private final String LOCAL_DIRECTORY_PATH = "src/main/resources/";
 
     @Override
     public String getData() {
@@ -31,6 +31,32 @@ public class FileDAOImpl implements DataDAO {
     @Override
     public void saveDataToLocalFile(String dataForSave, String fileName) {
 
+
+        String filePath = String.format("src/main/resources/%s.txt", fileName);
+
+        File file = new File(filePath);
+
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.write(dataForSave);
+        } catch (IOException e) {
+            UserController.addException(new IOException("Ошибка при сохранении данных в файл. " + e.getMessage()));
+        }
+    }
+
+    @Override
+    public void clearDataFromLocalDirectory() {
+
+        File directory = new File(LOCAL_DIRECTORY_PATH);
+
+        if (directory.isDirectory()) {
+            File[] files = directory.listFiles();
+
+            if (files != null) {
+                for (File file : files) {
+                    boolean deleted = file.delete();
+                }
+            }
+        }
     }
 
     /**
