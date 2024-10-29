@@ -66,39 +66,3 @@ public class BinarySearchImpl<T>
         return null;
     }
 }
-
-class Test {
-
-    public static void main(String[] args) {
-        BinarySearchImpl binarySearch = new BinarySearchImpl();
-
-        int i = binarySearch.binarySearchBySpecies(List.of(
-                new Animal.Builder()
-                        .species("a")
-                        .eyeColor("a")
-                        .hair(true)
-                        .build(),
-                new Animal.Builder()
-                        .species("a")
-                        .eyeColor("b")
-                        .hair(true)
-                        .build(),
-                new Animal.Builder()
-                        .species("b")
-                        .eyeColor("a")
-                        .hair(false)
-                        .build(),
-                new Animal.Builder()
-                        .species("b")
-                        .eyeColor("b")
-                        .hair(false)
-                        .build()
-        ), new Animal.Builder()
-                .species("b")
-                .eyeColor("a")
-                .hair(false)
-                .build(),
-                GeneralComparatorUtil.getComparatorForSortableEntity());
-        System.out.println(i);
-    }
-}
