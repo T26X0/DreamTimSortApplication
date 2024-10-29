@@ -24,9 +24,11 @@ public interface DataController {
 
     void saveCacheInLocalFile();
 
+    void saveCacheInLocalFileByEntities();
+
     void clearCache();
 
-    boolean cacheIsClear();
+    boolean cacheIsNotClear();
 
     void clearDataFromLocalDirectory();
 

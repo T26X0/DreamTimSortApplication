@@ -31,23 +31,9 @@ public class SearchByEntityImpl implements SearchByEntity<Sortable> {
     }
 
     @Override
-    public int findByEntity(List<Sortable> allData, Sortable entity) throws EmptyCacheException {
-        return getIdByEntityFromList(allData, entity, GeneralComparatorUtil.getComparatorForSortableEntity());
-    }
-
-    @Override
     public List<Sortable> findByField(List<Sortable> allData, String field) throws EmptyCacheException {
         return allData.stream()
                 .filter(it -> it.getAllFieldToStringList().contains(field))
                 .toList();
-    }
-
-    private <T> int getIdByEntityFromList(List<Sortable> allData, Sortable soughtEntity, Comparator<Sortable> comparator) {
-        for (int i = 0; i < allData.size(); i++) {
-            Sortable temp = allData.get(i);
-            int compare = comparator.compare(temp, soughtEntity);
-            if (compare == 0) return i;
-        }
-        return -1;
     }
 }

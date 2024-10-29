@@ -55,6 +55,9 @@ public class UserControllerImpl implements UserController {
             case ENTERING_DATA_IN_TERMINAL -> enterDataInTerminal();
             case SORTING_DATA_FROM_CACHE -> sortDataFromCache();
             case SAVE_IN_FILE -> saveCacheInLocalFile();
+            case SAVE_IN_FILE_BY_ENTITIES -> saveAllListsWithSortedDataByEntity();
+//            case FIND_BY_ENTITY -> ;
+//            case FIND_BY_FIELD -> ;
             case RESET_CACHE -> resetCache();
             case RESET_FILE_FOR_DATA -> resetFileForData();
             case SHOW_FULL_CACHE -> showFullCache();
@@ -175,6 +178,11 @@ public class UserControllerImpl implements UserController {
         System.out.println(dataController.getListEntities(Entities.ANIMAL));
         System.out.println(dataController.getListEntities(Entities.BARREL));
         System.out.println(dataController.getListEntities(Entities.HUMAN));
+    }
+
+    @Override
+    public void saveAllListsWithSortedDataByEntity() {
+        dataController.saveCacheInLocalFileByEntities();
     }
 
     @Override

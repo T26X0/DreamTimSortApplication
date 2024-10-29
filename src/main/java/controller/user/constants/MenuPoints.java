@@ -13,7 +13,12 @@ public enum MenuPoints {
     CREATING_RAND_DATA("2", "2. Создать рандомные данные"),
     ENTERING_DATA_IN_TERMINAL("3", "3. Ввести данные из терминала"),
     SORTING_DATA_FROM_CACHE("4", "4. Сортировать сохраненные в кэше данные"),
-    SAVE_IN_FILE("5", "5. Сбросить кэш"),
+    SAVE_IN_FILE("5", "5. Сохранить данные в общий файл"),
+
+    SAVE_IN_FILE_BY_ENTITIES("15", "15. Сохранить данные разные файлы"),
+    FIND_BY_ENTITY("16", "16. Найти по шаблону сущности"),
+    FIND_BY_FIELD("17", "17. Найти все сущности по полю"),
+
     RESET_CACHE("6", "6. Сбросить кэш"),
     RESET_FILE_FOR_DATA("7", "7. Сбросить рабочую директорию"),
     SHOW_FULL_CACHE("8", "8. Отобразить весь кэш"),

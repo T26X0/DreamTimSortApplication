@@ -23,9 +23,9 @@ public class BinarySearchImpl<T>
     }
 
     @Override
-    public int binarySearchBySpecies(List<T> allSortableEntities,
-                                     T targetSortableEntity,
-                                     Comparator<T> comparator) {
+    public int binarySearchByEntity(List<T> allSortableEntities,
+                                    T targetSortableEntity,
+                                    Comparator<T> comparator) {
         int left = 0;
         int right = allSortableEntities.size() - 1;
 

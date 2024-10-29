@@ -33,5 +33,6 @@ public interface UserController {
     void sortDataFromCache();
     void resetFileForData();
     void showAllListsWithSortedDataByEntity();
+    void saveAllListsWithSortedDataByEntity();
     void showFullCache();
 }

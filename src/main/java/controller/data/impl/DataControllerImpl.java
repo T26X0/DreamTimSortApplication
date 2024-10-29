@@ -4,11 +4,9 @@ import controller.data.DataController;
 import controller.data.comparator.GeneralComparatorUtil;
 import controller.data.generation.DataGeneration;
 import controller.data.generation.impl.DataGenerationImpl;
-import controller.data.search.binary.exception.EmptyCacheException;
 import controller.data.sort.TimSort;
 import controller.data.sort.impl.TimSortImpl;
 
-import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import model.constants.Entities;
@@ -110,6 +108,8 @@ public class DataControllerImpl implements DataController {
 
         List<Sortable> sortables = timSort.sort(cache, GeneralComparatorUtil.getComparatorForSortableEntity());
         setCache(sortables);
+        separateCacheToUniqueLists();
+
         return cache;
     }
 
@@ -127,15 +127,35 @@ public class DataControllerImpl implements DataController {
     }
 
     @Override
+    public void saveCacheInLocalFileByEntities() {
+        List<Sortable> savedAnimals = formatToSortable(getSavedAnimals());
+        String animalsForSave = StringProcessor.formatAsString(savedAnimals);
+
+        List<Sortable> savedBarrels = formatToSortable(getSavedBarrels());
+        String barrelsForSave = StringProcessor.formatAsString(savedBarrels);
+
+        List<Sortable> savedHumans = formatToSortable(getSavedHumans());
+        String humansForSave = StringProcessor.formatAsString(savedHumans);
+
+        dataService.saveDataToLocalFile(animalsForSave, "saved_animals");
+        dataService.saveDataToLocalFile(barrelsForSave, "saved_barrels");
+        dataService.saveDataToLocalFile(humansForSave, "saved_humans");
+    }
+
+    private <T> List<Sortable> formatToSortable(List<T> list) {
+        return list.stream().map(it -> (Sortable) it).toList();
+    }
+
+    @Override
     public void clearCache() {
 
         cache = null;
     }
 
     @Override
-    public boolean cacheIsClear() {
+    public boolean cacheIsNotClear() {
 
-        if (Objects.isNull(cache)) {
+        if (Objects.nonNull(cache)) {
             return true;
         }
 
@@ -164,29 +184,7 @@ public class DataControllerImpl implements DataController {
         return dynamicallyCreatedClasses.creatureClass(processedData);
     }
 
-    public void saveDataToLocalFile() throws EmptyCacheException {
-
-        separateCacheToUniqueLists();
-
-        String animalString = getSavedAnimals().stream()
-                .map(Animal::toString)
-                .collect(Collectors.joining(""));
-        dataService.saveDataToLocalFile(animalString, "sortedAnimals");
-
-        String barrelString = getSavedBarrels().stream()
-                .map(Barrel::toString)
-                .collect(Collectors.joining(""));
-        dataService.saveDataToLocalFile(barrelString, "sortedBarrels");
-
-        String humanString = getSavedHumans().stream()
-                .map(Human::toString)
-                .collect(Collectors.joining(""));
-        dataService.saveDataToLocalFile(humanString, "sortedHumans");
-    }
-
-    private void separateCacheToUniqueLists() throws EmptyCacheException {
-        if (cache == null)
-            throw new EmptyCacheException("В кэше нет данных для разделения.");
+    private void separateCacheToUniqueLists() {
 
         savedHumans.clear();
         savedBarrels.clear();
