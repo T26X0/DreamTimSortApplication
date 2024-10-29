@@ -11,7 +11,7 @@ public class TimSort {
     /**
      * Основной метод сортировки
      */
-    public static <T> void timSort(List<T> immutableList, Comparator<? super T> comparator) {
+    public static <T> List<T> timSort(List<T> immutableList, Comparator<? super T> comparator) {
         List<T> mutableList = new ArrayList<>(immutableList);
         int unsortedListSize = mutableList.size();
 
@@ -31,6 +31,7 @@ public class TimSort {
                 }
             }
         }
+        return mutableList;
     }
 
     /**
@@ -41,9 +42,6 @@ public class TimSort {
             T temp = array.get(i);
             int j = i - 1;
             while (j >= left && unsortedSubList.compare(array.get(j), temp) > 0) {
-                System.out.println("array: " + array);
-                System.out.println("j: " + j);
-                System.out.println("array.get(j): " + array.get(j));
                 T tempEntity = array.get(j);
                 array.set(j + 1, tempEntity);
                 j--;

@@ -94,7 +94,12 @@ public class UserControllerImpl implements UserController {
     @Override
     public void createRandomData() {
         try {
-            userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth("Сгенерированные данные: " + dataController.generateData(5).toString(), widthDisplay), TextBlocks.MENU_POINT, CenterMod.LEFT);
+            // TODO: отображение запроса на ввод лимита
+            // TODO: проверку на инт
+            int limit = Integer.parseInt(userInput.getDataFromUserInput());
+            List<Sortable> sortables = dataController.generateData(limit);
+            String sortablesDataForDisplay = sortables.toString();
+            userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth("Сгенерированные данные: " + sortablesDataForDisplay, widthDisplay), TextBlocks.MENU_POINT, CenterMod.LEFT);
         } catch (Exception e) {
             try {
                 userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);
@@ -169,7 +174,12 @@ public class UserControllerImpl implements UserController {
     @Override
     public void showFullCache() {
         try {
-            userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(dataController.getDataFromCache().toString(), widthDisplay), TextBlocks.MENU_POINT, CenterMod.LEFT);
+            List<Sortable> dataFromCache = dataController.getDataFromCache();
+            String dataFromCacheString = dataFromCache.toString();
+            System.out.println("dataFromCacheString:: " + dataFromCacheString);
+            String stringForDisplay = userDisplay.formatLongStringByDisplayWidth(dataFromCacheString, widthDisplay);
+            System.out.println("stringForDisplay:: " + stringForDisplay);
+            userDisplay.addRequiredField(stringForDisplay, TextBlocks.MENU_POINT, CenterMod.LEFT);
         } catch (Exception e) {
             try {
                 userDisplay.addRequiredField(userDisplay.formatLongStringByDisplayWidth(e.getMessage(), widthDisplay), TextBlocks.CONTENT, CenterMod.LEFT);

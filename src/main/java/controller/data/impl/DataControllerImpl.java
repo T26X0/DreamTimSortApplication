@@ -9,6 +9,7 @@ import controller.data.sort.TimSort;
 
 import java.util.stream.Collectors;
 import lombok.Getter;
+import lombok.Setter;
 import model.entity.Animal;
 import model.entity.Barrel;
 import model.entity.Human;
@@ -29,6 +30,7 @@ import java.util.function.Supplier;
 
 public class DataControllerImpl implements DataController {
 
+    @Setter
     private List<Sortable> cache = null;
     @Getter
     private List<Animal> savedAnimals = new ArrayList<>();
@@ -77,9 +79,9 @@ public class DataControllerImpl implements DataController {
     @Override
     public List<Sortable> sortData() {
 
-        TimSort.timSort(getDataFromCache(), GeneralComparatorUtil.getComparatorForSortableEntity());
-
-        return getDataFromCache();
+        List<Sortable> sortables = TimSort.timSort(cache, GeneralComparatorUtil.getComparatorForSortableEntity());
+        setCache(sortables);
+        return cache;
     }
 
     @Override
